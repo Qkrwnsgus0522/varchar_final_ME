@@ -14,6 +14,12 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script type="module">
+    import * as LR from "https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.25.0/web/lr-file-uploader-regular.min.js";
+
+    LR.registerBlocks(LR);
+</script>
 <style>
 	/* 에디터 최소 높이 */
 	.ck-editor__editable {
@@ -66,6 +72,22 @@
 	.tagcloud a {
 		font-size: 18px;
 	}
+	.my-config {
+	  --darkmode: 0;
+	  --h-accent: 223;
+	  --s-accent: 100%;
+	  --l-accent: 61%;
+	}
+	lr-file-uploader-minimal {
+		width: 100%;
+	}
+	.cart-list {
+		margin-bottom: 30px;
+	}
+	.col-lg-3 {
+		flex: 0 0 20%;
+    	max-width: 20%;
+	}
 </style>
 </head>
 <body class="goto-here">
@@ -116,8 +138,34 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="row" id="reviewImagesThumbnail">
+					
+				</div>
 				<div class="row">
 					<input type="hidden" name="buySerial" value="${ buyDetailData.buySerial }">
+					<div id="reviewImages">
+						<input type="hidden" name="reviewImage">
+					</div>
+					<lr-config
+					    ctx-name="my-uploader"
+					    pubkey="86c01c87f383d8c2191c"
+					    max-local-file-size-bytes="10000000"
+					    multiple-max="10"
+					    img-only="true"
+					></lr-config>
+					<lr-file-uploader-minimal
+					    css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.25.0/web/lr-file-uploader-minimal.min.css"
+					    ctx-name="my-uploader"
+					    class="my-config"
+					>
+					</lr-file-uploader-minimal>
+					<lr-data-output
+					  ctx-name="my-uploader"
+					  use-console
+					  use-input
+					  use-group
+					  use-event
+					></lr-data-output>
 					<textarea id="editor" name="reviewContent" placeholder="150자 이내로 작성해주세요" maxlength="200">
 					</textarea>
 					<!-- CKEditor -->
@@ -126,6 +174,36 @@
 				        	language: "ko",
 				        }).catch((error) => {
 				        	console.error(error);
+				        });
+			        </script>
+			        <script>
+			        	const reviewImagesContainer = document.getElementById("reviewImages");
+						const reviewImagesThumbnailContainer = document.getElementById("reviewImagesThumbnail");
+						const dataOutput = document.querySelector('lr-data-output');
+				        
+						dataOutput.addEventListener('lr-data-output', (event) => {
+				        	reviewImagesContainer.replaceChildren();
+				        	reviewImagesThumbnailContainer.replaceChildren();
+				        	for (var i = 0; i < event.detail.data.files.length; i++) {
+					        	console.log(event.detail.data.files[i].cdnUrl);
+					        	
+				        		const reviewImage = document.createElement("input");
+				        		reviewImage.type = "hidden";
+				        		reviewImage.value = event.detail.data.files[i].cdnUrl;
+				        		reviewImage.setAttribute("name", "reviewImage");
+				        		reviewImagesContainer.appendChild(reviewImage);
+				        		
+				        		var reviewImageThumbnailHtml = "";
+				        		reviewImageThumbnailHtml += "<div class='col-md-6 col-lg-3 ftco-animate'>";
+				        		reviewImageThumbnailHtml += 	"<div class='product'>";
+				        		reviewImageThumbnailHtml += 		"<a href='#' class='img-prod'>";
+				        		reviewImageThumbnailHtml += 			"<img class='img-fluid' src=" + event.detail.data.files[i].cdnUrl + " alt='Colorlib Template'>";
+				        		reviewImageThumbnailHtml += 			"<div class='overlay'></div>";
+				        		reviewImageThumbnailHtml += 		"</a>";
+				        		reviewImageThumbnailHtml += 	"</div>";
+				        		reviewImageThumbnailHtml += "</div>";
+				        		reviewImagesThumbnailContainer.innerHTML += reviewImageThumbnailHtml;
+				        	}
 				        });
 			        </script>
 					<input type="text" class="form-control" id="hashtags-input" placeholder="해시태그를 입력해주세요.">

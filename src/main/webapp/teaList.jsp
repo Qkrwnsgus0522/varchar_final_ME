@@ -41,7 +41,7 @@
 		$(window).on('load', function() {
 		    var category = "${ page.categoryName }";
 		    
-		    if (category != "" || category != null) {
+		    if (category != "") {
 		    	var categoryName = $(".product-category > li > a").get();
 		    	for (var i = 0; i < categoryName.length; i++) {
 		    		if (categoryName[i].text == category) {
@@ -50,7 +50,7 @@
 		    	}
 		    }
 		    else {
-		    	$(".product-category > li > a").first().addClass('active');
+		    	$(".product-category > li:first > a").addClass('active');
 		    	console.log("카테고리 없음");		    	
 		    }
 		});

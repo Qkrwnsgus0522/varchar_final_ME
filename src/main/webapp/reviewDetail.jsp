@@ -66,7 +66,8 @@
                   </div>
                 </td>
                 <td class="total">${ reviewData.memberId }</td>
-              </tr><!-- END TR-->
+              </tr>
+              <!-- END TR-->
             </tbody>
           </table>
         </div>
@@ -78,7 +79,7 @@
             <div class="tag-widget post-tag-container mb-5 mt-5">
               <div class="tagcloud">
               	<c:forEach var="reviewHashtag" items="${ reviewData.reviewHashtags }">
-              		<a href="reviewListPage.do" class="tag-cloud-link"># ${ reviewHashtag.reviewHashtagContent }</a>
+              		<a href="reviewListPage.do?searchName=ALL" class="tag-cloud-link"># ${ reviewHashtag.reviewHashtagContent }</a>
               	</c:forEach>
               </div>
             </div>

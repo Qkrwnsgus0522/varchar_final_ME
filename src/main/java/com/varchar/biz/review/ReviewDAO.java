@@ -81,7 +81,7 @@ public class ReviewDAO {
 			+ ") ";
 
 	static final private String SQL_SELECTONE = // 후기 상세
-			"SELECT r.REVIEW_NUM, m.MEMBER_NAME, r.BUY_SERIAL, r.REVIEW_CONTENT, t.TEA_NAME, i.IMAGE_URL, bd.BUY_CNT, t.TEA_CONTENT, r.REVIEW_INSERT_TIME "
+			"SELECT r.REVIEW_NUM, r.MEMBER_ID, m.MEMBER_NAME, r.BUY_SERIAL, r.REVIEW_CONTENT, t.TEA_NAME, i.IMAGE_URL, bd.BUY_CNT, t.TEA_CONTENT, r.REVIEW_INSERT_TIME "
 			+ "FROM REVIEW r "
 			+ "JOIN BUY_DETAIL bd ON r.BUY_SERIAL = bd.BUY_SERIAL "
 			+ "JOIN TEA t ON t.TEA_NUM = bd.TEA_NUM "
@@ -226,6 +226,7 @@ class ReviewSelectOneRowMapper implements RowMapper<ReviewVO> {
 	public ReviewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ReviewVO data = new ReviewVO();
 		data.setReviewNum(rs.getInt("REVIEW_NUM"));
+		data.setMemberId(rs.getString("MEMBER_ID"));
 		data.setMemberName(rs.getString("MEMBER_NAME"));
 		data.setBuySerial(rs.getInt("BUY_SERIAL"));
 		data.setReviewContent(rs.getString("REVIEW_CONTENT"));

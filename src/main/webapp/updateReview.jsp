@@ -145,7 +145,7 @@
 			            		}
 			            		if (tag && !hashtags.includes(tag)) {
 			            			const a = document.createElement("a");
-			            			a.innerText = "#" + tag;
+			            			a.innerText = "# " + tag;
 			            			a.classList.add("tag-cloud-link");
 			            			const i = document.createElement("input");
 			            			i.type = "hidden";
@@ -185,10 +185,10 @@
 			            		}
 			            	});
 			            </script>
-							<c:if test="${ reviewData.reviewHashtag ne null }">
-								<c:forEach var="hashtag" items="${ reviewData.reviewHashtag }">
+							<c:if test="${ reviewData.reviewHashtags ne null }">
+								<c:forEach var="reviewHashtag" items="${ reviewData.reviewHashtags }">
 									<script>
-										var tag = "${ hashtag }";
+										var tag = "${ reviewHashtag.reviewHashtagContent }";
 										addHashtag(tag);
 									</script>
 								</c:forEach>

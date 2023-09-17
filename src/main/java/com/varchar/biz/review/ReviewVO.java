@@ -12,7 +12,6 @@ public class ReviewVO {
 	private int buySerial;
 	private String reviewContent;
 	private Date reviewInsertTime;
-	private String[] reviewHashtag;
 	
 	// 임시변수
 	private String reviewSearch;
@@ -25,6 +24,8 @@ public class ReviewVO {
 	private int startRnum;
 	private int endRnum;
 	private int teaNum;
+	private String[] reviewHashtag;
+	private String[] reviewImage;
 	
 	List<ReviewHashtagVO> reviewHashtags;
 	
@@ -173,6 +174,14 @@ public class ReviewVO {
 
 	public void setReviewHashtags(List<ReviewHashtagVO> reviewHashtags) {
 		this.reviewHashtags = reviewHashtags;
+	}
+	
+	public String[] getReviewImage() {
+		return reviewImage;
+	}
+
+	public void setReviewImage(String[] reviewImage) {
+		this.reviewImage = reviewImage;
 	}
 
 	@Override
