@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.varchar.biz.hashtag.ReviewHashtagVO;
+import com.varchar.biz.tea.ImageVO;
 
 public class ReviewVO {
 	private int reviewNum;
@@ -29,6 +30,7 @@ public class ReviewVO {
 	private int hashtagNum;
 	
 	List<ReviewHashtagVO> reviewHashtags;
+	List<ImageVO> reviewImages;
 	
 	public ReviewVO() {
 		this(0, "", 0, "");
@@ -192,6 +194,14 @@ public class ReviewVO {
 	public void setHashtagNum(int hashtagNum) {
 		this.hashtagNum = hashtagNum;
 	}
+	
+	public List<ImageVO> getReviewImages() {
+		return reviewImages;
+	}
+
+	public void setReviewImages(List<ImageVO> reviewImages) {
+		this.reviewImages = reviewImages;
+	}
 
 	@Override
 	public String toString() {
@@ -201,6 +211,6 @@ public class ReviewVO {
 				+ ", imageUrl=" + imageUrl + ", memberName=" + memberName + ", buyCnt=" + buyCnt + ", startRnum="
 				+ startRnum + ", endRnum=" + endRnum + ", teaNum=" + teaNum + ", reviewHashtag="
 				+ Arrays.toString(reviewHashtag) + ", reviewImage=" + Arrays.toString(reviewImage) + ", hashtagNum="
-				+ hashtagNum + ", reviewHashtags=" + reviewHashtags + "]";
+				+ hashtagNum + ", reviewHashtags=" + reviewHashtags + ", reviewImages=" + reviewImages + "]";
 	}
 }

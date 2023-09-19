@@ -1,7 +1,6 @@
 package com.varchar.view.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.varchar.biz.buy.BuyDetailService;
 import com.varchar.biz.buy.BuyDetailVO;
@@ -26,6 +25,7 @@ import com.varchar.biz.tea.TeaService;
 import com.varchar.biz.tea.TeaVO;
 
 @Controller
+@SessionAttributes("reviewData")
 public class ReviewController {
 
 	@Autowired
@@ -98,7 +98,7 @@ public class ReviewController {
 	// ------------------------- 리뷰 상세 페이지 ---------------------------------
 
 	@RequestMapping(value="/reviewDetailPage.do")
-	public String reviewDetailPage(ReviewVO reviewVO, ReviewHashtagVO reviewHashtagVO, Model model) {
+	public String reviewDetailPage(ReviewVO reviewVO, ReviewHashtagVO reviewHashtagVO, ImageVO imageVO, Model model) {
 
 		//** 해당 리뷰 존재 안함 ---> 유효성 추가 필요 */
 		reviewVO.setReviewSearch("리뷰상세");
@@ -106,9 +106,15 @@ public class ReviewController {
 		System.out.println("로그: reviewDetailAction: " + reviewVO);
 
 		if (reviewVO != null) {
+			// 리뷰 해시태그 selectAll
 			reviewHashtagVO.setItemNum(reviewVO.getReviewNum());
 			reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
 			reviewVO.setReviewHashtags(reviewHashtagService.selectAll(reviewHashtagVO));
+			
+			// 리뷰 이미지 selectAll
+			imageVO.setTeaReviewNum(reviewVO.getReviewNum());
+			reviewVO.setReviewImages(imageService.selectAll(imageVO));
+			
 			model.addAttribute("reviewData", reviewVO);
 		}
 		System.out.println(reviewVO);
@@ -189,18 +195,20 @@ public class ReviewController {
 	// ------------------------- 리뷰 수정 페이지 ---------------------------------
 
 	@RequestMapping(value="/updateReview.do")
-	public String updateReviews(ReviewVO reviewVO, HashtagDetailVO hashtagDetailVO, ReviewHashtagVO reviewHashtagVO, Model model) {
+	public String updateReviews(ReviewVO reviewVO, HashtagDetailVO hashtagDetailVO, ReviewHashtagVO reviewHashtagVO, ImageVO imageVO, Model model) {
 		//** 후기 수정 실패시 ---> 유효성 추가 필요 */
 		System.out.println("로그 updateReview.do reviewVO: " +reviewVO);
 		int reviewNum = reviewVO.getReviewNum(); // 리뷰번호
 		reviewHashtagVO.setItemNum(reviewNum); // reviewHashtagVO에 리뷰번호 set
 		hashtagDetailVO.setItemNum(reviewNum); // hashtagDetailVO에 리뷰번호 set
+		imageVO.setImageNum(reviewNum); // imageVO에 리뷰번호 set
 
 		reviewService.update(reviewVO); // 리뷰 내용 업데이트
 		hashtagDetailService.delete(hashtagDetailVO); // hashtagDetail 삭제
 
 		reviewVO.setReviewSearch("리뷰상세");
 
+		// 리뷰 해시태그 업데이트
 		if(reviewVO.getReviewHashtag() != null) { // 수정된 해시태그값이 존재하면
 			for(int i = 0; i < reviewVO.getReviewHashtag().length; i++) {  // 리뷰해시태그 길이만큼 for문 돌림
 
@@ -226,7 +234,18 @@ public class ReviewController {
 			List<ReviewHashtagVO> reviewHashtags = reviewHashtagService.selectAll(reviewHashtagVO);
 			model.addAttribute("reviewHashtags", reviewHashtags);
 		}
-
+		
+		///** 리뷰 이미지 업데이트 ---> 유효성 추가 필요 */
+		if(imageService.delete(imageVO)) {
+			for (int i = 0; i < reviewVO.getReviewImage().length; i++) {
+				String imageUrl = reviewVO.getReviewImage()[i];
+				System.out.println(imageUrl);
+				imageVO.setImageUrl(imageUrl);
+				imageVO.setImageDivision(i + 1);
+				imageService.insert(imageVO);
+			}
+		}
+		
 		model.addAttribute("reviewData", reviewService.selectOne(reviewVO));
 		return "reviewDetailPage.do";
 	}
@@ -262,17 +281,21 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value="/deleteReview.do")
-	public String deleteReviews(ReviewVO reviewVO, HashtagDetailVO hashtagDetailVO, HttpSession session, Model model) {
+	public String deleteReviews(ReviewVO reviewVO, HashtagDetailVO hashtagDetailVO, ImageVO imageVO, HttpSession session, Model model) {
 
 		reviewVO.setMemberId((String)session.getAttribute("sessionMemberId"));
-
-		// reviewDetail 삭제
-		hashtagDetailVO.setItemNum(reviewVO.getReviewNum());
-		hashtagDetailService.delete(hashtagDetailVO);
 		
 		if(reviewService.delete(reviewVO)) {
 			AlertVO sweetAlertVO = new AlertVO("후기삭제", "후기 삭제 성공!", null, "success", "myReviewsListPage.do?searchName=MEMBER");
 			model.addAttribute("sweetAlert", sweetAlertVO);
+			
+			// reviewDetail 삭제
+			hashtagDetailVO.setItemNum(reviewVO.getReviewNum());
+			hashtagDetailService.delete(hashtagDetailVO);
+			
+			// 리뷰 이미지 삭제
+			imageVO.setTeaReviewNum(reviewVO.getReviewNum());
+			imageService.delete(imageVO);
 		}
 
 		return "alertTrue.jsp";
