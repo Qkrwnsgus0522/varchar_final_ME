@@ -188,6 +188,11 @@ public class AdminHashtagController {
 	public String selectReviewHashtag(@RequestParam("hashtag") int reviewNum, ReviewHashtagVO reviewHashtagVO) {
 		
 		reviewHashtagVO.setItemNum(reviewNum);
+		reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
+		
+		System.out.println("reviewNum" + reviewNum);
+		System.out.println("reviewHashtagVO" +reviewHashtagVO);
+		
 	    List<ReviewHashtagVO> reviewHashtags = reviewHashtagService.selectAll(reviewHashtagVO);
 	    System.out.println(reviewHashtags);
 	    

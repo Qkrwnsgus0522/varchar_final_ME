@@ -26,6 +26,7 @@ public class ReviewVO {
 	private int teaNum;
 	private String[] reviewHashtag;
 	private String[] reviewImage;
+	private int hashtagNum;
 	
 	List<ReviewHashtagVO> reviewHashtags;
 	
@@ -183,14 +184,23 @@ public class ReviewVO {
 	public void setReviewImage(String[] reviewImage) {
 		this.reviewImage = reviewImage;
 	}
+	
+	public int getHashtagNum() {
+		return hashtagNum;
+	}
+
+	public void setHashtagNum(int hashtagNum) {
+		this.hashtagNum = hashtagNum;
+	}
 
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewNum=" + reviewNum + ", memberId=" + memberId + ", buySerial=" + buySerial
-				+ ", reviewContent=" + reviewContent + ", reviewInsertTime=" + reviewInsertTime + ", reviewHashtag="
-				+ Arrays.toString(reviewHashtag) + ", reviewSearch=" + reviewSearch + ", searchName=" + searchName
-				+ ", teaName=" + teaName + ", teaContent=" + teaContent + ", imageUrl=" + imageUrl + ", memberName="
-				+ memberName + ", buyCnt=" + buyCnt + ", startRnum=" + startRnum + ", endRnum=" + endRnum + ", teaNum="
-				+ teaNum + ", reviewHashtags=" + reviewHashtags + "]";
+				+ ", reviewContent=" + reviewContent + ", reviewInsertTime=" + reviewInsertTime + ", reviewSearch="
+				+ reviewSearch + ", searchName=" + searchName + ", teaName=" + teaName + ", teaContent=" + teaContent
+				+ ", imageUrl=" + imageUrl + ", memberName=" + memberName + ", buyCnt=" + buyCnt + ", startRnum="
+				+ startRnum + ", endRnum=" + endRnum + ", teaNum=" + teaNum + ", reviewHashtag="
+				+ Arrays.toString(reviewHashtag) + ", reviewImage=" + Arrays.toString(reviewImage) + ", hashtagNum="
+				+ hashtagNum + ", reviewHashtags=" + reviewHashtags + "]";
 	}
 }

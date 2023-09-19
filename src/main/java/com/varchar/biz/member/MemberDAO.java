@@ -129,6 +129,7 @@ public class MemberDAO {
 
 // -----------------------------------------------------------------------------------------------
 
+// SQL_SELECTONE, SQL_SELECTONE_LOGIN, SQL_SELECTONE_CKECKPHONE, SQL_SELECTONE_CKECKEMAIL
 class MemberSaltRowMapper implements RowMapper<MemberVO> { 
 
 	@Override

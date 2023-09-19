@@ -31,7 +31,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/login.do", method=RequestMethod.GET)
 	public String loginPage() { // 로그인 페이지
-		return "redirect:login.jsp";
+		return "login.jsp";
 	}
 
 	@RequestMapping(value = "/login.do", method=RequestMethod.POST) // 로그인
@@ -66,7 +66,7 @@ public class MemberController {
 			return "alertFalse.jsp";
 		}
 		
-		return "redirect:main.do";
+		return "main.do";
 	}
 	
 	// ------------------------------------- 로그아웃 페이지 ------------------------------------------
@@ -96,7 +96,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/signup.do", method=RequestMethod.GET)
 	public String signupPage() { // 회원가입 페이지
-		return "redirect:signup.jsp";
+		return "signup.jsp";
 	}
 
 	@RequestMapping(value = "/signup.do", method=RequestMethod.POST)
@@ -183,7 +183,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/updatePw.do", method=RequestMethod.GET)
 	public String updatePwPage() {
-		return "redirect:updatePw.jsp";
+		return "updatePw.jsp";
 	}
 
 	@RequestMapping(value = "/updatePw.do", method=RequestMethod.POST)

@@ -12,7 +12,6 @@ public class TeaVO {
 	private int teaCnt;
 	private String teaContent;
 	private int teaStatus;
-
 	
 	// 임시변수
 	private String teaSearchWord;

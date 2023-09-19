@@ -14,7 +14,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 <script type="module">
     import * as LR from "https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.25.0/web/lr-file-uploader-regular.min.js";
 
@@ -144,7 +143,7 @@
 				<div class="row">
 					<input type="hidden" name="buySerial" value="${ buyDetailData.buySerial }">
 					<div id="reviewImages">
-						<input type="hidden" name="reviewImage">
+						
 					</div>
 					<lr-config
 					    ctx-name="my-uploader"

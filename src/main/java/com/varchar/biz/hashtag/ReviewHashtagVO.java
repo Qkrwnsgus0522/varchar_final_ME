@@ -15,6 +15,8 @@ public class ReviewHashtagVO {
 	private String reviewContent;
 	private Date reviewInsertTime;
 	private String imageUrl;
+	private int hashtagNum;
+	private int usageCount;
 
 	public ReviewHashtagVO() {
 		this(0,"");
@@ -87,13 +89,24 @@ public class ReviewHashtagVO {
 	public void setReviewHashtagContent(String reviewHashtagContent) {
 		this.reviewHashtagContent = reviewHashtagContent;
 	}
-	
+	public int getHashtagNum() {
+		return hashtagNum;
+	}
+	public void setHashtagNum(int hashtagNum) {
+		this.hashtagNum = hashtagNum;
+	}
+	public int getUsageCount() {
+		return usageCount;
+	}
+	public void setUsageCount(int usageCount) {
+		this.usageCount = usageCount;
+	}
 	@Override
 	public String toString() {
 		return "ReviewHashtagVO [reviewHashtagNum=" + reviewHashtagNum + ", reviewHashtagContent="
 				+ reviewHashtagContent + ", itemNum=" + itemNum + ", hashTagSearchCondition=" + hashTagSearchCondition
 				+ ", reviewNum=" + reviewNum + ", buySerial=" + buySerial + ", memberName=" + memberName
 				+ ", reviewContent=" + reviewContent + ", reviewInsertTime=" + reviewInsertTime + ", imageUrl="
-				+ imageUrl + "]";
+				+ imageUrl + ", hashtagNum=" + hashtagNum + ", usageCount=" + usageCount + "]";
 	}
 }
