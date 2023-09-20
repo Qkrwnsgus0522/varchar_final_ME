@@ -1,4 +1,4 @@
-package com.varchar.biz.tea;
+package com.varchar.biz.image;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +25,8 @@ public class ImageDAO {
 	
 	static final private String SQL_UPDATE = "UPDATE IMAGE SET IMAGE_URL = ? "
 											+ "WHERE IMAGE_NUM = ? AND IMAGE_DIVISION = ?";
-	
-//	static final private String SQL_DELETE = "";
+											
+	static final private String SQL_DELETE = "DELETE FROM IMAGE WHERE TEA_REVIEW_NUM = ?";
 	
 	public List<ImageVO> selectAll(ImageVO imageVO){
 		Object[] args = { imageVO.getTeaReviewNum() };
@@ -44,6 +44,7 @@ public class ImageDAO {
 		if(result <= 0) {
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -58,7 +59,13 @@ public class ImageDAO {
 	}
 	
 	public boolean delete(ImageVO imageVO) {
-		return false;
+		
+		int result = jdbcTemplete.update(SQL_DELETE, imageVO.getTeaReviewNum());
+		
+		if(result <= 0) {
+			return false;
+		}
+		return true;
 	}
 }
 

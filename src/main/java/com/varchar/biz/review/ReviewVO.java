@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.varchar.biz.hashtag.ReviewHashtagVO;
-import com.varchar.biz.tea.ImageVO;
+import com.varchar.biz.image.ImageVO;
 
 public class ReviewVO {
 	private int reviewNum;

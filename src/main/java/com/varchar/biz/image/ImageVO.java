@@ -1,4 +1,4 @@
-package com.varchar.biz.tea;
+package com.varchar.biz.image;
 
 public class ImageVO {
 	private int imageNum;

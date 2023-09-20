@@ -17,10 +17,10 @@ import com.varchar.biz.hashtag.HashtagDetailService;
 import com.varchar.biz.hashtag.HashtagDetailVO;
 import com.varchar.biz.hashtag.ReviewHashtagService;
 import com.varchar.biz.hashtag.ReviewHashtagVO;
+import com.varchar.biz.image.ImageService;
+import com.varchar.biz.image.ImageVO;
 import com.varchar.biz.review.ReviewService;
 import com.varchar.biz.review.ReviewVO;
-import com.varchar.biz.tea.ImageService;
-import com.varchar.biz.tea.ImageVO;
 import com.varchar.biz.tea.TeaService;
 import com.varchar.biz.tea.TeaVO;
 
