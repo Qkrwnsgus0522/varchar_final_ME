@@ -49,7 +49,11 @@ public class ImageVO {
 	public void setImageDivision(int imageDivision) {
 		this.imageDivision = imageDivision;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "ImageVO [imageNum=" + imageNum + ", teaReviewNum=" + teaReviewNum + ", imageUrl=" + imageUrl
+				+ ", imageDivision=" + imageDivision + "]";
+	}
+	
 }

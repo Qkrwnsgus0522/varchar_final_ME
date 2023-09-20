@@ -74,7 +74,7 @@ public class ReviewController {
 		reviewVO.setSearchName(searchName + "_PAGING");
 		reviewVO.setStartRnum(pagingVO.getStartRnum());
 		reviewVO.setEndRnum(pagingVO.getEndRnum());
-		
+
 		// 해시태그 검색을 위한 SearchCondition
 		if(reviewHashtagVO.getReviewHashtagContent() != null) {
 			reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
@@ -82,7 +82,7 @@ public class ReviewController {
 
 		// 전체 리뷰 출력
 		List<ReviewVO> reviewDatas = reviewService.selectAll(reviewVO); // startRnum 부터 endRnum 까지의 리뷰
-		
+
 		// 각 리뷰별 해시태그 뽑아서 배열에 저장
 		for(ReviewVO reviewData : reviewDatas) {
 			reviewHashtagVO.setItemNum(reviewData.getReviewNum()); // 리뷰별 reviewNum set해줌
@@ -110,11 +110,11 @@ public class ReviewController {
 			reviewHashtagVO.setItemNum(reviewVO.getReviewNum());
 			reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
 			reviewVO.setReviewHashtags(reviewHashtagService.selectAll(reviewHashtagVO));
-			
+
 			// 리뷰 이미지 selectAll
 			imageVO.setTeaReviewNum(reviewVO.getReviewNum());
 			reviewVO.setReviewImages(imageService.selectAll(imageVO));
-			
+
 			model.addAttribute("reviewData", reviewVO);
 		}
 		System.out.println(reviewVO);
@@ -160,7 +160,7 @@ public class ReviewController {
 		reviewVO.setReviewSearch("리뷰확인");
 		int reviewNum = reviewService.selectOne(reviewVO).getReviewNum(); // 삽입해 생긴 리뷰번호
 		reviewHashtagVO.setItemNum(reviewNum); // reviewHashtagVO에 리뷰번호 set 
-		
+
 		imageVO.setTeaReviewNum(reviewNum);
 		for (int i = 0; i < reviewVO.getReviewImage().length; i++) {
 			String imageUrl = reviewVO.getReviewImage()[i];
@@ -169,7 +169,7 @@ public class ReviewController {
 			imageVO.setImageDivision(i + 1);
 			imageService.insert(imageVO);
 		}
-		
+
 		for (int i = 0; i < reviewVO.getReviewHashtag().length; i++) { // 리뷰해시태그 길이만큼 for문 돌림
 			String content = reviewVO.getReviewHashtag()[i]; // content 변수에 해시태그값 저장
 			reviewHashtagVO.setReviewHashtagContent(content); // reviewHashtagVO에 content 값 저장
@@ -234,7 +234,7 @@ public class ReviewController {
 			List<ReviewHashtagVO> reviewHashtags = reviewHashtagService.selectAll(reviewHashtagVO);
 			model.addAttribute("reviewHashtags", reviewHashtags);
 		}
-		
+
 		///** 리뷰 이미지 업데이트 ---> 유효성 추가 필요 */
 		if(imageService.delete(imageVO)) {
 			for (int i = 0; i < reviewVO.getReviewImage().length; i++) {
@@ -245,22 +245,27 @@ public class ReviewController {
 				imageService.insert(imageVO);
 			}
 		}
-		
+
 		model.addAttribute("reviewData", reviewService.selectOne(reviewVO));
 		return "reviewDetailPage.do";
 	}
 
 	@RequestMapping(value="/updateReviewPage.do")
-	public String updateReviewsPage(ReviewVO reviewVO, ReviewHashtagVO reviewHashtagVO, Model model) {
+	public String updateReviewsPage(ReviewVO reviewVO, ReviewHashtagVO reviewHashtagVO, ImageVO imageVO, Model model) {
 		//** 해당 후기 없을시 ---> 유효성 추가 필요 */
 		reviewVO.setReviewSearch("리뷰상세");
 		reviewVO = reviewService.selectOne(reviewVO);
 		System.out.println("로그: UrpAction: " + reviewVO); // 로그 줄임말 실화?
 
 		if (reviewVO != null) {
+			// 리뷰 해시태그 selectAll
 			reviewHashtagVO.setItemNum(reviewVO.getReviewNum());
 			reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
 			reviewVO.setReviewHashtags(reviewHashtagService.selectAll(reviewHashtagVO));
+
+			// 리뷰 이미지 selectAll
+			imageVO.setTeaReviewNum(reviewVO.getReviewNum());
+			reviewVO.setReviewImages(imageService.selectAll(imageVO));
 			model.addAttribute("reviewData", reviewVO);
 		}
 		System.out.println(reviewVO);
@@ -284,15 +289,15 @@ public class ReviewController {
 	public String deleteReviews(ReviewVO reviewVO, HashtagDetailVO hashtagDetailVO, ImageVO imageVO, HttpSession session, Model model) {
 
 		reviewVO.setMemberId((String)session.getAttribute("sessionMemberId"));
-		
+
 		if(reviewService.delete(reviewVO)) {
 			AlertVO sweetAlertVO = new AlertVO("후기삭제", "후기 삭제 성공!", null, "success", "myReviewsListPage.do?searchName=MEMBER");
 			model.addAttribute("sweetAlert", sweetAlertVO);
-			
+
 			// reviewDetail 삭제
 			hashtagDetailVO.setItemNum(reviewVO.getReviewNum());
 			hashtagDetailService.delete(hashtagDetailVO);
-			
+
 			// 리뷰 이미지 삭제
 			imageVO.setTeaReviewNum(reviewVO.getReviewNum());
 			imageService.delete(imageVO);
@@ -339,14 +344,14 @@ public class ReviewController {
 		reviewVO.setEndRnum(pagingVO.getEndRnum());
 		System.out.println(reviewVO);
 		List<ReviewVO> reviewDatas = reviewService.selectAll(reviewVO); // startRnum 부터 endRnum 까지의 리뷰
-		
+
 		// 내 후기 해시태그 뽑아서 배열에 저장
 		for (ReviewVO reviewData : reviewDatas) {
 			reviewHashtagVO.setItemNum(reviewData.getReviewNum()); // 내 후기별 reviewNum set 해줌
 			reviewHashtagVO.setHashTagSearchCondition("후기번호검색");
 			reviewData.setReviewHashtags(reviewHashtagService.selectAll(reviewHashtagVO)); // 각 리뷰별 해시태그값들 set
 		}
-		
+
 		System.out.println("마이페이지 리뷰 로그3 reviewDatas " + reviewDatas);
 		System.out.println("마이페이지 리뷰 로그4 memberId " + memberId);
 		model.addAttribute("reviewDatas", reviewDatas);

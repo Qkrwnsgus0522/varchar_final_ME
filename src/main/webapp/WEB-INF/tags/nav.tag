@@ -59,7 +59,7 @@
               </div>
             </li>
 			  <li class="nav-item"><a href="reviewListPage.do?searchName=ALL" class="nav-link">티 후기</a></li> <!-- nav.review -->
-	          <li class="nav-item"><a href="mapPage.do" class="nav-link">픽업 장소</a></li> <!-- nav.place -->
+	          <li class="nav-item"><a href="mapPage.do" class="nav-link">지점 위치</a></li> <!-- nav.place -->
 			<!-- 비로그인 시 : 마이페이로 이동 -->
 			<c:if test="${ empty sessionMemberId }">
 			<li class="nav-item dropdown">

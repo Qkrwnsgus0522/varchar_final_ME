@@ -83,10 +83,25 @@
 	.cart-list {
 		margin-bottom: 30px;
 	}
-	.col-lg-3 {
+	.edit_align_center_f {
 		flex: 0 0 20%;
     	max-width: 20%;
+		display: flex;
+		align-items: center;
 	}
+	.product {
+        position: relative;
+    }
+    .icon-cancel {
+        position: absolute;
+        top: 5px; /* 위쪽 여백 조절 */
+        right: 5px; /* 오른쪽 여백 조절 */
+        background-color: transparent;
+        border: none;
+        color: red;
+        font-size: 20px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body class="goto-here">
@@ -137,11 +152,60 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="row" id="originReviewImagesThumbnail">
+				
+				</div>
+				<hr>
 				<div class="row" id="reviewImagesThumbnail">
 					
 				</div>
 				<div class="row">
 					<input type="hidden" name="buySerial" value="${ reviewData.buySerial }"> <input type="hidden" name="reviewNum" value="${ reviewData.reviewNum }">
+					<div id="originReviewImages">
+						<script>					
+							const originReviewImagesContainer = document.getElementById("originReviewImages");
+							const originReviewImagesThumbnailContainer = document.getElementById("originReviewImagesThumbnail");
+							
+							function originImages(url) {
+								const originReviewImage = document.createElement("input");
+								originReviewImage.type = "hidden";
+								originReviewImage.value = url;
+								originReviewImage.setAttribute("name", "reviewImage");
+				        		originReviewImagesContainer.appendChild(originReviewImage);
+				        		
+				        		const originThumbnailDiv = document.createElement('div');
+				        		originThumbnailDiv.className = 'col-md-6 col-lg-3 edit_align_center_f';
+				        		const originProductDiv = document.createElement('div');
+				        		originProductDiv.className = 'product';
+				        		const originImgElement = document.createElement('img');
+				        		originImgElement.className = 'img-fluid';
+				        		originImgElement.src = url;
+				        		originImgElement.alt = 'Colorlib Template';
+				        		const originCancelSpan = document.createElement('span');
+				        		originCancelSpan.className = 'icon-cancel';
+				        		originCancelSpan.addEventListener("click", () => {
+				        			originReviewImagesContainer.removeChild(originReviewImage);
+				        			originReviewImagesThumbnailContainer.removeChild(originThumbnailDiv);
+				        			editMultipleMax();
+				        		});
+				        		const originOverlayDiv = document.createElement('div');
+				        		originOverlayDiv.className = 'overlay';
+	
+				        		originProductDiv.appendChild(originImgElement);
+				        		originProductDiv.appendChild(originCancelSpan);
+				        		originProductDiv.appendChild(originOverlayDiv);
+				        		originThumbnailDiv.appendChild(originProductDiv);
+				        		originReviewImagesThumbnailContainer.appendChild(originThumbnailDiv);
+				        		editMultipleMax();
+							}
+						</script>
+						<c:forEach var="reviewImage" items="${ reviewData.reviewImages }">
+							<script>
+								var url = "${ reviewImage.imageUrl }";
+								originImages(url);
+							</script>
+						</c:forEach>
+					</div>
 					<div id="reviewImages">
 						
 					</div>
@@ -181,7 +245,24 @@
 						const reviewImagesThumbnailContainer = document.getElementById("reviewImagesThumbnail");
 						const dataOutput = document.querySelector('lr-data-output');
 				        
-						dataOutput.addEventListener('lr-data-output', (event) => {
+						let imageCount = 0;
+						
+						window.addEventListener('LR_REMOVE', (event) => {
+							console.log(event.detail);
+							console.log(imageCount);
+							if (imageCount == 1) {
+								reviewImagesContainer.replaceChildren();
+					        	reviewImagesThumbnailContainer.replaceChildren();
+					        	let imageCount = 0;
+							}
+						});
+						
+						window.addEventListener('LR_UPLOAD_FINISH', (event) => {
+							console.log(event.detail);
+							console.log("업로드 완료");
+						});
+						
+						window.addEventListener('lr-data-output', (event) => {
 				        	reviewImagesContainer.replaceChildren();
 				        	reviewImagesThumbnailContainer.replaceChildren();
 				        	for (var i = 0; i < event.detail.data.files.length; i++) {
@@ -193,18 +274,34 @@
 				        		reviewImage.setAttribute("name", "reviewImage");
 				        		reviewImagesContainer.appendChild(reviewImage);
 				        		
-				        		var reviewImageThumbnailHtml = "";
-				        		reviewImageThumbnailHtml += "<div class='col-md-6 col-lg-3 ftco-animate'>";
-				        		reviewImageThumbnailHtml += 	"<div class='product'>";
-				        		reviewImageThumbnailHtml += 		"<a href='#' class='img-prod'>";
-				        		reviewImageThumbnailHtml += 			"<img class='img-fluid' src=" + event.detail.data.files[i].cdnUrl + " alt='Colorlib Template'>";
-				        		reviewImageThumbnailHtml += 			"<div class='overlay'></div>";
-				        		reviewImageThumbnailHtml += 		"</a>";
-				        		reviewImageThumbnailHtml += 	"</div>";
-				        		reviewImageThumbnailHtml += "</div>";
-				        		reviewImagesThumbnailContainer.innerHTML += reviewImageThumbnailHtml;
+				        		const thumbnailDiv = document.createElement('div');
+				        		thumbnailDiv.className = 'col-md-6 col-lg-3 edit_align_center_f';
+				        		const productDiv = document.createElement('div');
+				        		productDiv.className = 'product';
+				        		const imgElement = document.createElement('img');
+				        		imgElement.className = 'img-fluid';
+				        		imgElement.src = event.detail.data.files[i].cdnUrl;
+				        		imgElement.alt = 'Colorlib Template';
+				        		const overlayDiv = document.createElement('div');
+				        		overlayDiv.className = 'overlay';
+
+				        		productDiv.appendChild(imgElement);
+				        		productDiv.appendChild(overlayDiv);
+				        		thumbnailDiv.appendChild(productDiv);
+				        		reviewImagesThumbnailContainer.appendChild(thumbnailDiv);
 				        	}
+				        	imageCount = event.detail.data.files.length;
 				        });
+						
+						function editMultipleMax() {
+							const originReviewImagesThumbnail = document.getElementById('originReviewImagesThumbnail');
+							const originThumbnailchildCount = originReviewImagesThumbnail.childElementCount;
+							
+							let maxUpload = 10 - originThumbnailchildCount;
+							$("lr-config").attr("multiple-max", maxUpload);
+							$("lr-config").attr("multiplemax", maxUpload);
+							console.log("maxUpload : " + maxUpload);
+						}
 			        </script>
 					<input type="text" class="form-control" id="hashtags-input" placeholder="해시태그를 입력해주세요.">
 					<input type="hidden" id="reviewHashtag">
@@ -261,6 +358,8 @@
 			            			}
 			            		}
 			            	});
+			            	
+			            	editMultipleMax();
 			            </script>
 							<c:if test="${ reviewData.reviewHashtags ne null }">
 								<c:forEach var="reviewHashtag" items="${ reviewData.reviewHashtags }">
