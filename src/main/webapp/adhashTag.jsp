@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="Ad/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="Ad/images/favicon.png" />
-<style type="text/css">
+  <style type="text/css">
 
   a {
   	text-decoration: none;

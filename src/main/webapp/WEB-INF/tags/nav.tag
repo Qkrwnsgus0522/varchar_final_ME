@@ -80,6 +80,9 @@
 			  	<a class="dropdown-item" href="myReviewsListPage.do?searchName=MEMBER">내 후기</a> <!-- nav.myReview -->
 			  	<a class="dropdown-item" href="updateInfo.do">회원정보변경</a> <!-- nav.member -->
 			  </div>
+			 <c:if test="${ sessionMemberGrade eq 1 }">
+			 	 <li class="nav-item"><a href="admin.do" class="nav-link">관리자페이지</a></li>
+			 </c:if>
 			</li>
 			</c:if>
 			</ul>

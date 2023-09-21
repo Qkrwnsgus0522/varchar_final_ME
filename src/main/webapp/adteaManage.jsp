@@ -77,7 +77,7 @@
 									<h4 class="card-title">상품 추가</h4>
 									<p class="card-description">양식에 맞게 기재하세요.</p>
 									<!-- 상품 추가 form 시작 -->
-									<form action="insertTea.do" class="forms-sample" enctype="multipart/form-data" id="teaForm" >
+									<form action="insertTea.do" class="forms-sample" enctype="multipart/form-data" id="insertTeaForm" method="post">
 									<div class="form-group">
 											<label>상품 카테고리</label>
 											<select id="categorySelect" class="form-control" name="categoryNum">
@@ -101,13 +101,13 @@
 										</div>
 										<div class="form-group">
 											<label>상품 사진</label>
-											<input type="file" class="file-upload-default" id="fileInput" />
+											<input type="file" class="file-upload-default" name="fileUpload" id="fileInput" multiple="multiple"/>
 											<div class="input-group col-xs-12">
 												<input type="text" class="form-control file-upload-info" disabled placeholder="$-{teaData.imageUrl}" id="fileInputText" />
-												<span class="input-group-append" id="uploadSpan" >
-													<button class="file-upload-browse btn btn-success btn-icon-text"
-														type="button" id="uploadButton"><i class="ti-upload btn-icon-prepend"></i>사진 업로드</button>
-												</span>
+												<button class="btn btn-danger btn-icon-text" type="button" id="uploadButton">
+						
+													<i class="ti-upload btn-icon-prepend"></i>사진 업로드
+												</button>
 											</div>
 											 <div class="image-preview mt-2">
                                                <img src="#" alt="미리보기" id="imagePreview" style="display: none; max-width: 200px;">
@@ -117,7 +117,7 @@
 											<label for="exampleInputPassword1">상품 설명</label>
 											<input type="text" class="form-control form-control-lg" name="teaContent"  required>
 										</div>
-										<input type="submit" class="btn btn-primary me-2" id="submitButton">
+										<input type="submit" class="btn btn-primary me-2" id="insertSubmitButton">
 									</form>
 									<!-- 상품 추가 form 끝 -->
 								</div>
@@ -551,10 +551,11 @@ function checkInput(input) {
 </script>	
 
 <script type="text/javascript">
-$('#uploadSpan').on("click", async function(){
+
+$('#uploadButton').on("click", function(){
 	console.log('이미지 업로드 버튼 클릭됨');
 	
-	const { value: file } = await Swal.fire({
+	/* const { value: file } = await Swal.fire({
 		  title: '상품 이미지 선택',
 		  input: 'file',
 		  inputAttributes: {
@@ -576,7 +577,9 @@ $('#uploadSpan').on("click", async function(){
 		  //$('input[type=file]').attr('value', file);
 		  console.log('이미지 로그2 '+reader.readAsDataURL(file));
 		  reader.readAsDataURL(file)
-		}
+		} */
+		
+	$('#fileInput').trigger('click');
 });
 </script>
 <script>

@@ -83,7 +83,12 @@ public class TeaDAO {
 				+ "JOIN CATEGORY c ON t.CATEGORY_NUM = c.CATEGORY_NUM "
 				+ "WHERE i.IMAGE_DIVISION = 1 "
 				+ "AND t.TEA_NUM = ? ";
-
+		
+		static final private String SQL_SELECTONE_MAX =
+				"SELECT t.TEA_NUM, t.TEA_NAME, t.TEA_PRICE, t.TEA_CNT, t.TEA_CONTENT, c.CATEGORY_NAME, t.TEA_STATUS, NULL AS IMAGE_URL "
+				+ "FROM TEA t JOIN CATEGORY c ON t.CATEGORY_NUM = c.CATEGORY_NUM "
+				+ "WHERE t.TEA_NUM = (SELECT MAX(TEA_NUM) FROM TEA)";
+		
 		static final private String SQL_UPDATE = "UPDATE TEA SET TEA_CNT = (TEA_CNT - ?) "
 												+ "WHERE TEA_NUM = ? ";
 		
@@ -126,8 +131,13 @@ public class TeaDAO {
 
 	public TeaVO selectOne(TeaVO teaVO) {
 		try {
-			Object[] args = { teaVO.getTeaNum() };
-			return jdbcTemplate.queryForObject(SQL_SELECTONE, args, new TeaSelectRowMapper());
+			if (teaVO.getTeaCondition().equals("마지막 상품")) {
+				return jdbcTemplate.queryForObject(SQL_SELECTONE_MAX, new TeaSelectRowMapper());
+			}
+			else {
+				Object[] args = { teaVO.getTeaNum() };
+				return jdbcTemplate.queryForObject(SQL_SELECTONE, args, new TeaSelectRowMapper());				
+			}
 		}
 		catch (EmptyResultDataAccessException e) {
 			return null;

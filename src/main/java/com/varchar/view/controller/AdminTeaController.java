@@ -3,6 +3,7 @@ package com.varchar.view.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,11 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.varchar.biz.category.CategoryService;
 import com.varchar.biz.category.CategoryVO;
+import com.varchar.biz.image.ImageService;
 import com.varchar.biz.image.ImageVO;
 import com.varchar.biz.tea.TeaService;
 import com.varchar.biz.tea.TeaVO;
@@ -28,6 +31,8 @@ public class AdminTeaController {
 	private CategoryService categoryService;
 	@Autowired
 	private TeaService teaService;
+	@Autowired
+	private ImageService imageService;
 
 	
 	// --------------------------------- 관리자 홈(메인) 페이지 이동 ---------------------------------
@@ -121,47 +126,34 @@ public class AdminTeaController {
 	
 	// --------------------------------- 상품 추가 ---------------------------------
 	@RequestMapping(value = "/insertTea.do")
-	public String insertTea(TeaVO teaVO) throws IllegalStateException, IOException {
+	public String insertTea(TeaVO teaVO, ImageVO imageVO, HttpServletRequest request) {
+
+		final String path = request.getSession().getServletContext().getRealPath("images");
+
+		List<MultipartFile> fileUpload = teaVO.getFileUpload();	
 		
-		
-//		//MultipartFile fileUpload=teaVO.getFileUpload();
-//		System.out.println("insertTea.do: teaVO " + teaVO);
-//		System.out.println("insertTea.do: fileUpload " + fileUpload);
-//		
-//		//MultipartFile fileUpload2=(MultipartFile) fileUpload;
-//		System.out.println(((MultipartFile) fileUpload.getAttribute("fileUpload")).getOriginalFilename());
-//		//((MultipartFile) fileUpload.getAttribute("fileUpload")).getOriginalFilename();
-////		System.out.println(fileUpload.getAttribute("fileUpload"));
-////		System.out.println(fileUpload.getContentType());
-////		System.out.println(fileUpload.getContextPath());
-////		System.out.println(fileUpload.getLocalAddr());
-////		System.out.println(fileUpload.getLocalName());
-////		System.out.println(fileUpload.getPathInfo());
-////		System.out.println(fileUpload.getRequestURL());
-//		
-//		if(fileUpload==null){
-//			
-//			
-//			
-//			//String fileName=fileUpload.getOriginalFilename();
-//			//System.out.println("파일명: "+fileName);
-//			
-////			imageVO.setImageUrl(fileName);
-////			imageVO.setTeaReviewNum(teaVO);
-////			imageVO.setImageDivision(0);
-//			
-//			//fileUpload2.transferTo(new File("D:\\JHyun\\workspace\\varchar_final\\src\\main\\webapp\\images\\"+fileName));
-//		}
-//		else {
-//			imageVO.setImageUrl("/images/product-11.jpg");
-//		}
-//		
-//		
 		if (teaService.insert(teaVO)) {
-			
+			teaVO.setTeaCondition("마지막 상품");
+			int TeaNum = teaService.selectOne(teaVO).getTeaNum();
+			imageVO.setTeaReviewNum(TeaNum);
+			for (MultipartFile file : fileUpload) {
+				if (!file.isEmpty()) {
+					String originFileName = file.getOriginalFilename();
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					String ranFileName = UUID.randomUUID().toString() + ext;
+					
+					try {
+						file.transferTo(new File(path + "\\" + ranFileName));
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
+					
+					imageVO.setImageUrl("images/" + ranFileName);
+					imageService.insert(imageVO);
+				}
+			}
 		}
-		
-		return "adminTea.do";
+		return "redirect:adminTea.do";
 	}
 	
 	// --------------------------------- 상품 삭제 ---------------------------------

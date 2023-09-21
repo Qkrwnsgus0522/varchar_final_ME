@@ -20,7 +20,7 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">안녕하세요!&nbsp;<span class="text-black fw-bold">${sessionMemberId}님</span></h1>
+            <h1 class="welcome-text">안녕하세요!&nbsp;<span class="text-black fw-bold">${ sessionMemberName }님</span></h1>
             <h3 class="welcome-sub-text">관리자 전용 페이지입니다.</h3>
           </li>
         </ul>
