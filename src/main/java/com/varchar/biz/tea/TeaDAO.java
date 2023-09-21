@@ -89,7 +89,7 @@ public class TeaDAO {
 		
 		static final private String SQL_UPDATE_TEA = "UPDATE TEA SET TEA_STATUS = ? WHERE TEA_NUM = ?";
 		
-		static final private String SQL_UPDATE_ADMIN = "UPDATE TEA SET TEA_PRICE = ?, TEA_CNT = ? WHERE TEA_NUM = ? ";
+		static final private String SQL_UPDATE_ADMIN = "UPDATE TEA SET TEA_PRICE = ?, TEA_CNT = ?, TEA_NAME = ?, TEA_CONTENT = ?, TEA_STATUS= ?, CATEGORY_NUM= ? WHERE TEA_NUM = ? ";
 		
 		static final private String SQL_UPDATE_CATEGORY = "UPDATE TEA SET CATEGORY_NUM = 0 WHERE CATEGORY_NUM = ? ";
 		
@@ -153,7 +153,7 @@ public class TeaDAO {
 			result = jdbcTemplate.update(SQL_UPDATE, teaVO.getTeaCnt(), teaVO.getTeaNum());
 		}
 		else if(teaVO.getTeaCondition().equals("상품변경")) { // 관리자 상품 정보 변경
-			result = jdbcTemplate.update(SQL_UPDATE_ADMIN, teaVO.getTeaPrice(), teaVO.getTeaCnt(), teaVO.getTeaNum());
+			result = jdbcTemplate.update(SQL_UPDATE_ADMIN, teaVO.getTeaPrice(), teaVO.getTeaCnt(), teaVO.getTeaName(), teaVO.getTeaContent(), teaVO.getTeaStatus(), teaVO.getCategoryNum(), teaVO.getTeaNum());
 		}
 		else if(teaVO.getTeaCondition().equals("카테고리변경")) { // 관리자 상품 정보 변경
 			result = jdbcTemplate.update(SQL_UPDATE_CATEGORY, teaVO.getCategoryNum());

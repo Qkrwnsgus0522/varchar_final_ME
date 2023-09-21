@@ -1,21 +1,22 @@
 package com.varchar.view.controller;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.google.gson.Gson;
 import com.varchar.biz.category.CategoryService;
 import com.varchar.biz.category.CategoryVO;
+import com.varchar.biz.image.ImageVO;
 import com.varchar.biz.tea.TeaService;
 import com.varchar.biz.tea.TeaVO;
 
@@ -92,7 +93,7 @@ public class AdminTeaController {
 //		categoryVO.setCategoryNum(categoryNum);
 		
 		// 해당되는 카테고리에 있는 상품이 있을 수 있으므로 해당없음으로 변경해줘야 함
-		if(categoryService.selectOne(categoryVO) == null){	// 존재 확인
+		if(categoryService.selectOne(categoryVO) != null){	// 존재 확인
 			
 			//categoryVO.setCategoryCondition("현재 해당 쿼리 없음 추후 맞는 서치컨디션 입력");
 			if(categoryService.update(categoryVO)) {
@@ -120,10 +121,42 @@ public class AdminTeaController {
 	
 	// --------------------------------- 상품 추가 ---------------------------------
 	@RequestMapping(value = "/insertTea.do")
-	public String insertTea(TeaVO teaVO) {
+	public String insertTea(TeaVO teaVO) throws IllegalStateException, IOException {
 		
-		System.out.println("insertTea.do: " + teaVO);
 		
+//		//MultipartFile fileUpload=teaVO.getFileUpload();
+//		System.out.println("insertTea.do: teaVO " + teaVO);
+//		System.out.println("insertTea.do: fileUpload " + fileUpload);
+//		
+//		//MultipartFile fileUpload2=(MultipartFile) fileUpload;
+//		System.out.println(((MultipartFile) fileUpload.getAttribute("fileUpload")).getOriginalFilename());
+//		//((MultipartFile) fileUpload.getAttribute("fileUpload")).getOriginalFilename();
+////		System.out.println(fileUpload.getAttribute("fileUpload"));
+////		System.out.println(fileUpload.getContentType());
+////		System.out.println(fileUpload.getContextPath());
+////		System.out.println(fileUpload.getLocalAddr());
+////		System.out.println(fileUpload.getLocalName());
+////		System.out.println(fileUpload.getPathInfo());
+////		System.out.println(fileUpload.getRequestURL());
+//		
+//		if(fileUpload==null){
+//			
+//			
+//			
+//			//String fileName=fileUpload.getOriginalFilename();
+//			//System.out.println("파일명: "+fileName);
+//			
+////			imageVO.setImageUrl(fileName);
+////			imageVO.setTeaReviewNum(teaVO);
+////			imageVO.setImageDivision(0);
+//			
+//			//fileUpload2.transferTo(new File("D:\\JHyun\\workspace\\varchar_final\\src\\main\\webapp\\images\\"+fileName));
+//		}
+//		else {
+//			imageVO.setImageUrl("/images/product-11.jpg");
+//		}
+//		
+//		
 		if (teaService.insert(teaVO)) {
 			
 		}

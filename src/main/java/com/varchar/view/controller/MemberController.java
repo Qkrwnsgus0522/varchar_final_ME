@@ -54,7 +54,6 @@ public class MemberController {
 
 		if (memberVO != null) {
 			session.setAttribute("sessionMemberId", memberVO.getMemberId());
-			session.setAttribute("sessionMemberName", memberVO.getMemberName());
 			session.setAttribute("sessionMemberPlatform", memberVO.getMemberPlatform());
 			System.out.println(memberVO);
 //			if(memberVO.getMemberGrade().equals("ADMIN")) { // 관리자 검사
@@ -85,7 +84,6 @@ public class MemberController {
 
 		System.out.println("LogoutController 로그");
 		session.removeAttribute("sessionMemberId");
-		session.removeAttribute("sessionMemberName");
 		session.removeAttribute("sessionMemberPlatform");
 
 		AlertVO sweetAlertVO = new AlertVO("로그아웃", "메인으로 이동합니다.", null, "success", "main.do");
@@ -271,13 +269,18 @@ public class MemberController {
 	
 	// ------------------------------------- SNS 로그인  -------------------------------------	
 	@RequestMapping(value = "/snsLogin.do")
-	public String snsLogin(MemberVO memberVO, Model model, HttpSession session) {
+	public String snsLogin(HttpServletRequest request, MemberVO memberVO, Model model, HttpSession session) {
 		System.out.println(memberVO);
 		memberVO.setMemberSearch("아이디 중복검사");
 		if (memberService.selectOne(memberVO) == null) {
 			model.addAttribute("memberData", memberVO);
 			return "signup.jsp";
 		}
+		
+		memberVO.setMemberName(memberService.selectOne(memberVO).getMemberName());
+		
+		System.out.println("Name: "+memberVO.getMemberName());
+		
 		session.setAttribute("sessionMemberId", memberVO.getMemberId());
 		session.setAttribute("sessionMemberName", memberVO.getMemberName());
 		session.setAttribute("sessionMemberPlatform", memberVO.getMemberPlatform());
