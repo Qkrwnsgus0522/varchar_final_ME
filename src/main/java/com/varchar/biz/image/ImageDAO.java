@@ -21,7 +21,7 @@ public class ImageDAO {
 //	static final private String SQL_SELECTONE = "";
 	
 	static final private String SQL_INSERT = "INSERT INTO IMAGE(IMAGE_NUM, TEA_REVIEW_NUM, IMAGE_URL, IMAGE_DIVISION) "
-											+ "VALUES((SELECT NVL(MAX(IMAGE_NUM), 0) + 1 FROM IMAGE), ?, ?, (SELECT COUNT(*) FROM IMAGE WHERE TEA_REVIEW_NUM = ?))";
+											+ "VALUES((SELECT NVL(MAX(IMAGE_NUM), 0) + 1 FROM IMAGE), ?, ?, (SELECT COUNT(*) + 1 FROM IMAGE WHERE TEA_REVIEW_NUM = ?))";
 	
 	static final private String SQL_UPDATE = "UPDATE IMAGE SET IMAGE_URL = ? "
 											+ "WHERE IMAGE_NUM = ? AND IMAGE_DIVISION = ?";

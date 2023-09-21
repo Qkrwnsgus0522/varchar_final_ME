@@ -114,7 +114,8 @@
 											<a href="teaListPage.do?teaHashtagContent=${ teaHashtag.teaHashtagContent }" class="tag-cloud-link" style="background: #ffffff"># ${ teaHashtag.teaHashtagContent }</a>
 										</c:forEach>
 									</div>
-									<div class="overlay"></div> </a>
+									<div class="overlay"></div>
+								</a>
 								<div class="text py-3 pb-4 px-3 text-center">
 									<h3>
 										<a href="teaDetailPage.do?teaNum=${ teaData.teaNum }&searchName=DETAIL">${ teaData.teaName }</a>

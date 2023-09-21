@@ -160,7 +160,8 @@
 					
 				</div>
 				<div class="row">
-					<input type="hidden" name="buySerial" value="${ reviewData.buySerial }"> <input type="hidden" name="reviewNum" value="${ reviewData.reviewNum }">
+					<input type="hidden" name="buySerial" value="${ reviewData.buySerial }">
+					<input type="hidden" name="reviewNum" value="${ reviewData.reviewNum }">
 					<div id="originReviewImages">
 						<script>					
 							const originReviewImagesContainer = document.getElementById("originReviewImages");

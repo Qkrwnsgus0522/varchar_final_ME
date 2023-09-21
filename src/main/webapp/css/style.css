@@ -12,7 +12,8 @@
 }
 
 .nav-line {
-  border-left: 1px solid #82ae46;
+  /* border-left: 1px solid #82ae46; */
+  border-left: 1px solid #4A55A2;
   height: 50px;
   margin: 8.9px 0px;
 }
@@ -26,7 +27,8 @@
   .nav-line {
     border-left: none;
     height: 0px;
-    border-bottom: 1px solid #82ae46;
+    /* border-bottom: 1px solid #82ae46; */
+    border-bottom: 1px solid #4A55A2;
   }
 }
 

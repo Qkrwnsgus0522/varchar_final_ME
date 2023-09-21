@@ -26,7 +26,7 @@
 						    	<span class="text">Healing and Fresh all day with varchar</span> <!-- primary.emptyid -->
 						    </c:if>
 					    	<c:if test="${ not empty sessionMemberId }">
-						    	<span class="text"><img id="edit_loginIcon" alt="" src="images/icon_${ sessionMemberPlatform }.png"> ${ sessionMemberId }님 환영합니다!</span> <!-- primary.id -->
+						    	<span class="text"><img id="edit_loginIcon" alt="" src="images/icon_${ sessionMemberPlatform }.png"> ${ sessionMemberName }님 환영합니다!</span> <!-- primary.id -->
 						    </c:if>
 					    </div>
 				    </div>

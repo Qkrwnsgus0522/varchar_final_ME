@@ -119,7 +119,7 @@
 			</div>
 		</div>
 	</div>
-	<form action="insertReview.do" method="post">
+	<form id="insertReviewForm" action="insertReview.do" method="post">
 		<section class="ftco-section ftco-degree-bg">
 			<div class="container">
 				<div class="cart-list">
@@ -308,10 +308,17 @@
 		            	});
 		            </script>
 				</div>
-			<input type="submit" class="btn btn-primary py-3 px-4" value="후기작성">
+			<input id="submitBtn" type="submit" class="btn btn-primary py-3 px-4" value="후기작성">
 			</div>
 		</section>
 	</form>
+	<!-- <script>
+		$("#submitBtn").on("click", function() {
+			if ($("#editor").val() != "") {
+				
+			}
+		});
+	</script> -->
 	<!-- .section -->
 
 	<footer class="ftco-footer ftco-section bg-light">

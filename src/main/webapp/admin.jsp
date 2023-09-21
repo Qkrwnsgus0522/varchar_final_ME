@@ -84,7 +84,7 @@
                                    <p class="card-subtitle card-subtitle-dash">원하시는 상품을 클릭하여 관리하세요</p>
                                   </div>
                                   <div>
-                                    <a href=""><button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>새 카테고리 추가</button></a>
+                                    <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" onclick="addCate();"><i class="mdi mdi-account-plus"></i>새 카테고리 추가</button>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">
@@ -167,30 +167,13 @@
   <script src="Ad/js/dashboard.js"></script>
   <script src="Ad/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 function fixCate(categoryNum, categoryName) {
     var resFix = prompt('수정하실 카테고리명을 입력하세요', categoryName);
     if (resFix !== null) {
         console.log(resFix);
-        
-        
-    	var category = {categoryNum: categoryNum, categoryName: resFix };
-    	
-    	$.ajax({
-            url: 'updateCategory.do',
-            type: 'POST',
-            data: category,
-            success: function(fresult){
-                //console.log('favorResult [' + favorResult + ']');
-              	
-            },
-            error: function(error){
-               alert('error [' + error + ']');
-            }
-         });
 
-/*         // 요청 본문 데이터를 JSON 형식으로 설정
+        // 요청 본문 데이터를 JSON 형식으로 설정
         var requestData = {
             categoryNum: categoryNum,
             categoryName: resFix
@@ -216,33 +199,48 @@ function fixCate(categoryNum, categoryName) {
         })
         .catch(function(error) {
             console.error('오류 발생:', error);
-        }); */
+        });
     }
 }
 
 function delCate(categoryNum, categoryName) {
-	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    // 여기는 구현할 예정
+}
 
-	    	//var category = {categoryNum: categoryNum, categoryName: resFix };
-	    	
-	    	$.ajax({
-	            url: 'deleteCategory.do?categoryNum='+categoryNum,
-	            type: 'POST',
-	            success: function(fresult){
-	                //console.log('favorResult [' + favorResult + ']');
-	              	
-	            },
-	            error: function(error){
-	               alert('error [' + error + ']');
-	            }
-	         });
-	     
+</script>
+<script type="text/javascript">
+function addCate(categoryName) {
+    var resAdd = prompt('추가하실 카테고리명을 입력하세요');
+    if (resAdd !== null) {
+        console.log(resAdd);
 
-	 }else{   //취소
+        // var params 선언
+        var params = { categoryName: resAdd };
 
-	     return false;
+        var cateUrl = '/insertCategory.do';
 
-	 }
+        // fetch 요청을 보낼 때 파라미터를 body에 추가
+        fetch(cateUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(params) // 파라미터를 JSON 문자열로 변환하여 body에 추가
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('네트워크 응답 실패');
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data); // 서버에서 온 응답 데이터 처리
+            window.location.reload();
+        })
+        .catch(function(error) {
+            console.error('오류 발생:', error);
+        });
+    }
 }
 
 </script>
