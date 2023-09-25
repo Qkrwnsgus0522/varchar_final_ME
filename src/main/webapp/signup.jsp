@@ -14,6 +14,15 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> 
   	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+  	<script type="text/javascript">
+  		var onloadCallback = function() {
+  			grecaptcha.render('html_element', {
+  	          'sitekey' : '6LfbYEsoAAAAADbMBkuObINtbVX7g93_RheWuUun'
+  	        });
+  		};
+	</script>
+
   	<style type="text/css">
   		.edit-d-f {
   			display: flex;
@@ -184,9 +193,12 @@
                 <div class="w-100"></div>
 	            </div>
 				<div style="margin:auto; text-align:center;">
-					<p><input id="inputSubmit" type="button" class="btn btn-primary py-3 px-4" value="  가입하기  "style="vertical-align:middle; display:inline-block;"></p>
+					<p><input id="inputSubmit" type="button" class="btn btn-primary py-3 px-4" value="  가입하기  "style="vertical-align:middle; display:inline-block;" onclick='return check_recaptcha();'></p>
 				</div>
+				<div class="g-recaptcha" data-sitekey="6LfbYEsoAAAAADbMBkuObINtbVX7g93_RheWuUun"></div>
+	          	<div id="html_element"></div>
 	          </form>
+	          <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
           	  <!-- 회원가입 폼 태그 끝 -->
 			</div>
           </div> <!-- .col-md-8 -->
@@ -377,6 +389,16 @@
               		$("#signForm").submit();                			
 		    	}
 	    	});
+			
+			function check_recaptcha(){
+				var v = grecaptcha.getResponse();
+				if (v.length ==0) {
+					alert ("'로봇이 아닙니다.'를 체크해주세요.");
+					return false;
+				} else {
+					return true;
+				}
+			}
 	</script>
 
 	<!-- 커스텀 태그 적용하기 -->

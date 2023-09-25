@@ -243,6 +243,10 @@ public class ReviewController {
 
 		///** 리뷰 이미지 업데이트 ---> 유효성 추가 필요 */
 		if(imageService.delete(imageVO)) {
+			System.out.println("imageService.delete(imageVO) true 진입");
+		}
+		
+		if(reviewVO.getReviewImage() != null) {
 			for (int i = 0; i < reviewVO.getReviewImage().length; i++) {
 				String imageUrl = reviewVO.getReviewImage()[i];
 				System.out.println(imageUrl);
@@ -251,6 +255,7 @@ public class ReviewController {
 				imageService.insert(imageVO);
 			}
 		}
+
 
 		model.addAttribute("reviewData", reviewService.selectOne(reviewVO));
 		return "reviewDetailPage.do";

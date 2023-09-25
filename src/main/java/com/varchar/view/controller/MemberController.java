@@ -22,10 +22,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
 	// ------------------------------------- 로그인 페이지 ------------------------------------------
 
 	@RequestMapping(value = "/login.do", method=RequestMethod.GET)
@@ -39,35 +38,36 @@ public class MemberController {
 
 		memberVO.setMemberSearch("솔트");
 		String pw = memberVO.getMemberPw();
-		String salt = memberService.selectOne(memberVO).getMemberSalt(); // 회원의 솔트값 가져옴
-		String shaPW = Password.ShaPass(pw+salt);
-		memberVO.setMemberPw(shaPW);
 		
-		System.out.println("pw : " + pw);
-		System.out.println("암호화pw : " + shaPW);
-		System.out.println("사용된 salt : " + salt);
+		memberVO = memberService.selectOne(memberVO);
 		
-		memberVO.setMemberSearch("로그인");
-		memberVO = memberService.selectOne(memberVO); 
-		
-
-		if (memberVO != null) {
-			session.setAttribute("sessionMemberId", memberVO.getMemberId());
-			session.setAttribute("sessionMemberName", memberVO.getMemberName());
-			session.setAttribute("sessionMemberPlatform", memberVO.getMemberPlatform());
-			session.setAttribute("sessionMemberGrade", memberVO.getMemberGrade());
-			System.out.println(memberVO);
-//			if(memberVO.getMemberGrade().equals("ADMIN")) { // 관리자 검사
-//				return "관리자 페이지";
-//			}
+		if(memberVO != null) {
+			String salt = memberVO.getMemberSalt(); // 회원의 솔트값 가져옴
+			String shaPW = Password.ShaPass(pw+salt);
+			memberVO.setMemberPw(shaPW);
 			
-		} else {
-			AlertVO sweetAlertVO = new AlertVO("로그인실패", "로그인실패", null, "error", null);
-			model.addAttribute("sweetAlert", sweetAlertVO);
-			return "alertFalse.jsp";
+			System.out.println("pw : " + pw);
+			System.out.println("암호화pw : " + shaPW);
+			System.out.println("사용된 salt : " + salt);
+			
+			memberVO.setMemberSearch("로그인");
+			memberVO = memberService.selectOne(memberVO); 
+			
+			
+			if (memberVO != null) {
+				session.setAttribute("sessionMemberId", memberVO.getMemberId());
+				session.setAttribute("sessionMemberName", memberVO.getMemberName());
+				session.setAttribute("sessionMemberPlatform", memberVO.getMemberPlatform());
+				session.setAttribute("sessionMemberGrade", memberVO.getMemberGrade());
+				System.out.println(memberVO);
+				
+				return "main.do";
+			}	
 		}
 		
-		return "main.do";
+		AlertVO sweetAlertVO = new AlertVO("로그인실패", "로그인실패", null, "error", null);
+		model.addAttribute("sweetAlert", sweetAlertVO);
+		return "alertFalse.jsp";
 	}
 	
 	// ------------------------------------- 로그아웃 페이지 ------------------------------------------

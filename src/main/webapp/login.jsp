@@ -47,7 +47,16 @@
 		.edit_hidden {
 			display: none;
 		}
+		
 	</style>
+	
+	<script src="https://www.google.com/recaptcha/api.js?render=6LfpIUsoAAAAAOAtRW14-c_XrAOW6LyWOpQGLSYV&badge=bottomleft"></script>
+  	<script>
+   		function onSubmit(token) {
+     		document.getElementById("demo-form").submit();
+   		}
+ 	</script>
+    
   </head>
   <body class="goto-here">
   <!-- 상단, 하단은 커스텀 태그로 넣어주셈 -->
@@ -73,7 +82,8 @@
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
           	<!-- 로그인 폼 태그 -->
-			<form action="login.do" method="post" class="billing-form" onsubmit="return checkPw();">
+          	
+			<form action="login.do" method="post" class="billing-form" onsubmit="return checkPw();" id="demo-form">
 				<h3 class="mb-4 billing-heading" style="padding-bottom: 15px; border-bottom: 1px solid #e1e1e1">로그인</h3>
 	          	<div class="row align-items-end">
 	          		<div class="col-md-6" style="margin-top: 30px;">
@@ -92,10 +102,16 @@
 	              </div>
 	            </div>
 				<div style="margin:auto; text-align:center;">
-					<p><input type="submit" class="btn btn-primary py-3 px-4" value="  로그인  "style="vertical-align:middle; display:inline-block;"></p>
+					<p><input type="submit" class="btn btn-primary py-3 px-4 g-recaptcha" value="  로그인  "style="vertical-align:middle; display:inline-block;"
+							data-sitekey="6LfpIUsoAAAAAOAtRW14-c_XrAOW6LyWOpQGLSYV" 
+        					data-callback='onSubmit' 
+        					data-action='submit'></p>
 				</div>
 	          </form>
+	          
            	  <!-- 로그인 폼 태그 끝 -->
+           	  
+           	  
            	  <!-- SNS 로그인 시작 -->
            	  <div class="row mt-5">
 		      	<div class="col text-center">

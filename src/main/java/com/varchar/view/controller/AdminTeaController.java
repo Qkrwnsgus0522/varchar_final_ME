@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.varchar.biz.category.CategoryService;
 import com.varchar.biz.category.CategoryVO;
 import com.varchar.biz.image.ImageService;
 import com.varchar.biz.image.ImageVO;
+import com.varchar.biz.member.MemberService;
+import com.varchar.biz.member.MemberService;
+import com.varchar.biz.member.MemberVO;
 import com.varchar.biz.tea.TeaService;
 import com.varchar.biz.tea.TeaVO;
 
@@ -33,15 +36,65 @@ public class AdminTeaController {
 	private TeaService teaService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private MemberService memberService;
 
 	
 	// --------------------------------- 관리자 홈(메인) 페이지 이동 ---------------------------------
 	@RequestMapping(value = "/admin.do")
-	public String adminPage(CategoryVO categoryVO, Model model) {
+	public String adminPage(CategoryVO categoryVO, MemberVO memberVO ,Model model, HttpSession session) {
+		
+		if(session.getAttribute("sessionMemberGrade") != null) {
+			int memberGrade = (int)session.getAttribute("sessionMemberGrade");
+			
+			if(memberGrade == 1) {
+				List<CategoryVO> categoryDatas = categoryService.selectAll(null); //이거 NULL 없애는 방향 고려
+				model.addAttribute("categoryDatas", categoryDatas);
+				
+				List<MemberVO> memberDatas = memberService.selectAll(null); //이거 NULL 없애는 방향 고려
+				model.addAttribute("memberDatas", memberDatas);
+				
+				
+				return "admin.jsp";
+			}
+		}
+		return "main.do";
+		
+		
+	}
+	
+	// --------------------------------- 관리자 카테고리 페이지 이동 ---------------------------------
+	@RequestMapping(value = "/adminCategory.do")
+	public String adminCategoryPage(TeaVO teaVO, CategoryVO categoryVO, Model model) {
+
+		teaVO.setTeaCondition("카테고리");
+		List<TeaVO> teaDatas = teaService.selectAll(teaVO);
 		
 		List<CategoryVO> categoryDatas = categoryService.selectAll(null); //이거 NULL 없애는 방향 고려
+		
+		model.addAttribute("teaDatas", teaDatas);
 		model.addAttribute("categoryDatas", categoryDatas);
-		return "admin.jsp";
+		
+		return "adCategory.jsp";
+	}
+	
+	// --------------------------------- 관리자 카테고리 체크박스 변경 ---------------------------------
+	@RequestMapping(value = "/changeCategory.do")
+	public String adminCategory(@RequestParam(value="teaNums[]") List<String> teaNums, @RequestParam(value="categoryNum") int categoryNum, TeaVO teaVO, Model model) {
+		
+		System.out.println("teaNums: "+teaNums);
+		System.out.println("teaNums 0번째: "+teaNums.get(0));
+		System.out.println("categoryNum: "+categoryNum);
+		
+		teaVO.setTeaCondition("카테고리일괄변경");
+		teaVO.setCategoryNum(categoryNum);
+		for(int i = 0; i<teaNums.size(); i++) {
+			teaVO.setTeaNum((Integer.parseInt(teaNums.get(i))));
+			teaService.update(teaVO);
+		}
+		
+		return "redirect:admin.do";
+
 	}
 	
 	// --------------------------------- 카테고리 추가 ---------------------------------
@@ -74,8 +127,7 @@ public class AdminTeaController {
 		categoryVO = categoryService.selectOne(categoryVO);
 		
 		if(categoryVO != null){	// 존재 확인
-			
-			//categoryVO.setCategoryCondition("현재 해당 쿼리 없음 추후 맞는 서치컨디션 입력");
+
 			if(categoryService.delete(categoryVO)) {
 			
 			teaVO.setTeaCondition("카테고리변경");
@@ -93,14 +145,10 @@ public class AdminTeaController {
 		
 		System.out.println("updateCategory.do 진입 확인");
 		System.out.println("categoryVO" +categoryVO);
-//		System.out.println("categoryName" +categoryName);
-//		categoryVO.setCategoryName(categoryName);
-//		categoryVO.setCategoryNum(categoryNum);
 		
 		// 해당되는 카테고리에 있는 상품이 있을 수 있으므로 해당없음으로 변경해줘야 함
 		if(categoryService.selectOne(categoryVO) != null){	// 존재 확인
 			
-			//categoryVO.setCategoryCondition("현재 해당 쿼리 없음 추후 맞는 서치컨디션 입력");
 			if(categoryService.update(categoryVO)) {
 			
 			teaVO.setTeaCondition("카테고리변경");

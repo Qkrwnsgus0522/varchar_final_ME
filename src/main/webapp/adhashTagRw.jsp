@@ -109,7 +109,7 @@
                     	<form id="hashTagForm" method="post" action="admin.jsp" onsubmit="return false;">
                     	<div id="hashTagContainer" class="template-demo">
                          </div> <br>
-                        <button type="button" class="btn btn-primary">저장(Save)</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" >저장(Save)</button>
                         </form>
                       </div>
                     </div>
@@ -120,7 +120,7 @@
                       <p class="card-description">Add class <code>.btn-rounded</code></p>
                       <div class="template-demo">
                     	<div id="hashTagMaker" class="template-demo">
-                        <button type="button" id="addHashTag" class="btn btn-dark btn-rounded btn-fw">직접 입력 ㅇㅇ</button>
+                        <button type="button" id="addHashTag" class="btn btn-dark btn-rounded btn-fw">직접 입력</button>
                          </div> <br>
                       </div>
                     </div>
@@ -509,6 +509,52 @@ const Validation = {
         return inputString === null || inputString.trim() === '';
     }
 };
+
+$('#btnSave').on("click", function(){
+	console.log('버튼 클릭됨');
+	
+	var inputElements = hashTagContainer.querySelectorAll("input[type='button']"); // 유효성 검사를 위해 해시태그 입력란 내 모든 input 요소 찾기
+	console.log(inputElements);
+	
+	//var teaNum = $('#teaNum').val();
+	var reviewNum = $("#selectReview option:selected").val();
+	
+	var hashTags = new Array();
+	    
+	// 현재 입력된 해시태그를 Set에 추가
+	var i = 0;
+	inputElements.forEach(function(inputElement) {
+	var value = inputElement.value;
+	
+	
+	//hashTags.add(value);
+	hashTags[i] = value;
+	
+	console.log("value: "+value);
+	i++;
+	});
+	
+	console.log("arr: "+hashTags);
+	console.log("reviewNum: "+reviewNum);
+	
+	var hashTags = {itemNum: reviewNum, tag1: hashTags[0], tag2: hashTags[1], tag3: hashTags[2] };
+
+	
+	$.ajax({
+        url: 'adminHashtagReview.do',
+        type: 'POST',
+        data: hashTags,
+        success: function(fresult){
+        	alert('해시태그 저장 완료!');
+          	
+        },
+        error: function(error){
+           alert('error [' + error + ']');
+        }
+     });
+	
+	
+});
 
 </script>
 </body>

@@ -407,7 +407,7 @@ $("#teaToDel").change(function () {
     var teaPrice = selectedOption.attr('data-tea-price');
     var teaContent = selectedOption.attr('data-tea-content');
     var teaStatus = selectedOption.attr('data-tea-status');
-    console.log('여기오냐1');
+    console.log('로그1');
 
     // 각각의 <input> 엘리먼트에 데이터를 설정합니다.
     $('#teaNum').val(teaNum);
@@ -417,7 +417,7 @@ $("#teaToDel").change(function () {
 	$('#teaContent').val(teaContent);
 	$('#teaStatus').val(teaStatus);
 
-    console.log('여기오냐2');
+    console.log('로그2');
 });
 
 </script>	
@@ -483,7 +483,7 @@ $("#teaToFix").change(function () {
     var teaPrice = selectedOption.attr('data-tea-price');
     var teaContent = selectedOption.attr('data-tea-content');
     var teaStatus = selectedOption.attr('data-tea-status');
-    console.log('여기오냐1');
+    console.log('로그1');
   
     // 각각의 <input> 엘리먼트에 데이터를 설정합니다.
     $('#fixteaNum').val(teaNum);
@@ -494,7 +494,7 @@ $("#teaToFix").change(function () {
 	$('#existteaPrice').text(teaPrice);
 	$('#fixteaContent').val(teaContent);
 	$('#fixteaStatus').val(teaStatus);
-    console.log('여기오냐2');
+    console.log('로그2');
     
 });
 
@@ -554,30 +554,6 @@ function checkInput(input) {
 
 $('#uploadButton').on("click", function(){
 	console.log('이미지 업로드 버튼 클릭됨');
-	
-	/* const { value: file } = await Swal.fire({
-		  title: '상품 이미지 선택',
-		  input: 'file',
-		  inputAttributes: {
-		    'accept': 'image/*',
-		    'aria-label': '업로드할 이미지를 선택해주세요'
-		  }
-		})
-
-		if (file) {
-		  const reader = new FileReader()
-		  reader.onload = async(e) => {
-		    Swal.fire({
-		      title: '선택된 상품 이미지',
-		      imageUrl: e.target.result,
-		      imageAlt: 'The uploaded picture'
-		    })
-		  }
-		  console.log('이미지 로그1 '+file);
-		  //$('input[type=file]').attr('value', file);
-		  console.log('이미지 로그2 '+reader.readAsDataURL(file));
-		  reader.readAsDataURL(file)
-		} */
 		
 	$('#fileInput').trigger('click');
 });

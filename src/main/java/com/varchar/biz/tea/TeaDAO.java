@@ -98,6 +98,8 @@ public class TeaDAO {
 		
 		static final private String SQL_UPDATE_CATEGORY = "UPDATE TEA SET CATEGORY_NUM = 0 WHERE CATEGORY_NUM = ? ";
 		
+		static final private String SQL_UPDATE_CATEGORY_CHANGE = "UPDATE TEA SET CATEGORY_NUM = ? WHERE TEA_NUM = ? ";
+		
 		static final private String SQL_INSERT = "INSERT INTO TEA(TEA_NUM, CATEGORY_NUM, TEA_NAME, TEA_PRICE, TEA_CNT, TEA_CONTENT) "
 													+ "VALUES((SELECT NVL(MAX(TEA_NUM),1000)+1 FROM TEA), ?, ?, ?, ?, ?)";
 			
@@ -167,6 +169,9 @@ public class TeaDAO {
 		}
 		else if(teaVO.getTeaCondition().equals("카테고리변경")) { // 관리자 상품 정보 변경
 			result = jdbcTemplate.update(SQL_UPDATE_CATEGORY, teaVO.getCategoryNum());
+		}
+		else if(teaVO.getTeaCondition().equals("카테고리일괄변경")) { // 관리자 상품 정보 변경
+			result = jdbcTemplate.update(SQL_UPDATE_CATEGORY_CHANGE, teaVO.getCategoryNum(),teaVO.getTeaNum());
 		}
 		else { // 판매중단된 상품
 			result = jdbcTemplate.update(SQL_UPDATE_TEA, teaVO.getTeaStatus(), teaVO.getTeaNum());

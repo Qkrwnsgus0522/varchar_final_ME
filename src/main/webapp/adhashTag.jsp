@@ -471,7 +471,7 @@ $('#btnSave').on("click", function(){
         type: 'POST',
         data: hashTags,
         success: function(fresult){
-            //console.log('favorResult [' + favorResult + ']');
+        	alert('해시태그 저장 완료!');
           	
         },
         error: function(error){
