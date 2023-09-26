@@ -12,7 +12,7 @@
     <!-- 링크 부분 헤더 -->
 	<try:link/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> 
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
   	<script type="text/javascript">
@@ -372,12 +372,12 @@
 		    	} else if (!flagName) {
 		    		checkInputName();
 		    		$("#inputName").focus();
+		    	}  else if (!flagPhone) {
+		    		checkInputPhone();
+		    		$("#inputPhone").focus();
 		    	} else if (!flagEmail) {
 		    		checkInputEmail();
 		    		$("#inputEmail").focus();
-		    	} else if (!flagPhone) {
-		    		checkInputPhone();
-		    		$("#inputPhone").focus();
 		    	} else if (!flagAddress) {
 		    		$("#spanAddress").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
 		        	$("#spanAddress").css("color", "red");
@@ -400,7 +400,9 @@
 				}
 			}
 	</script>
-
+	<script type="text/javascript"> 
+	   history.replaceState({}, null, location.pathname);
+	</script>
 	<!-- 커스텀 태그 적용하기 -->
 	<try:footer/>	
 	<!-- 채팅 API -->

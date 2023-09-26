@@ -28,7 +28,12 @@
 			margin-right: 10px;
 			margin-left: 10px;
 		}
-		
+		.edit_hidden {
+			display: none;
+		}
+		#edit_snsLogin_media_l {
+			display: none;
+		}
 		#edit_span_kakao {
 			background-image: url("images/login_kakao.png");
 			background-size: 70px;
@@ -44,10 +49,67 @@
 			background-size: 70px;
 			cursor: pointer;
 		}
-		.edit_hidden {
-			display: none;
+		@media (min-width: 768px) {
+			#edit_snsLogin_media_s {
+				display: none;
+			}
+			#edit_snsLogin_media_l {
+				display: block;
+			}
+  			#edit_span_kakao_l {
+				background-image: url("images/login_kakao_m.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			#edit_span_naver_l {
+				background-image: url("images/login_naver_m.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			#edit_span_google_l {
+				background-image: url("images/login_google_m.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			.list-unstyled li span {
+				display: inline-block;
+			}
+			.list-unstyled li span {
+				width: 288px;
+				height: 58px;
+			}
+
 		}
-		
+		@media (min-width: 992px) {
+  			#edit_snsLogin_media_s {
+				display: none;
+			}
+			#edit_snsLogin_media_l {
+				display: block;
+			}
+  			#edit_span_kakao_l {
+				background-image: url("images/login_kakao_l.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			#edit_span_naver_l {
+				background-image: url("images/login_naver_l.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			#edit_span_google_l {
+				background-image: url("images/login_google_l.png");
+				background-size: contain;
+				cursor: pointer;
+			}
+			.list-unstyled li span {
+				display: inline-block;
+			}
+			.list-unstyled li span {
+				width: 331px;
+				height: 58px;
+			}
+  		}
 	</style>
 	
 	<script src="https://www.google.com/recaptcha/api.js?render=6LfpIUsoAAAAAOAtRW14-c_XrAOW6LyWOpQGLSYV&badge=bottomleft"></script>
@@ -113,15 +175,24 @@
            	  
            	  
            	  <!-- SNS 로그인 시작 -->
-           	  <div class="row mt-5">
+           	  <div class="row mt-5" id="edit_snsLogin_media_s">
 		      	<div class="col text-center">
 		      		<div class="block-27">
 		              <ul>
-		                <li><span id="edit_span_kakao"></span></li>
-		                <li><span id="edit_span_naver"></span></li>
-		                <li><span id="edit_span_google" data-client_id="831557176408-2a23dinpartetqap2lipe1c046pt24co.apps.googleusercontent.com"></span></li>
+		                <li><span class="btn_span_kakao" id="edit_span_kakao"></span></li>
+		                <li><span class="btn_span_naver" id="edit_span_naver"></span></li>
+		                <li><span class="btn_span_google" id="edit_span_google" data-client_id="831557176408-2a23dinpartetqap2lipe1c046pt24co.apps.googleusercontent.com"></span></li>
 		              </ul>
 		      		</div>
+		      	</div>
+		      </div>
+		      <div class="row mt-5" id="edit_snsLogin_media_l">
+		      	<div class="col text-center">
+		      		<ul class="list-unstyled">
+		      			<li><span class="btn_span_kakao" id="edit_span_kakao_l"></span></li>
+		      			<li><span class="btn_span_naver" id="edit_span_naver_l"></span></li>
+		      			<li><span class="btn_span_google" id="edit_span_google_l" data-client_id="831557176408-2a23dinpartetqap2lipe1c046pt24co.apps.googleusercontent.com"></span></li>
+		      		</ul>
 		      	</div>
 		      </div>
 		      <!-- SNS 로그인 끝 -->
@@ -131,7 +202,7 @@
 		      
 		      <!-- kakao API START -->
 		      <script type="text/javascript">
-		      	$('#edit_span_kakao').click(function(){
+		      	$('.btn_span_kakao').click(function(){
 		      		loginWithKakao();
 		      	});
 		      
@@ -177,7 +248,7 @@
 			
 			<!-- google API START -->
 			<script>
-				$('#edit_span_google').click(function(){
+				$('.btn_span_google').click(function(){
 					$('.nsm7Bb-HzV7m-LgbsSe-BPrWId').trigger('click');
 				});
 				
@@ -284,7 +355,7 @@
       	}
     </script>
     <script type="text/javascript">
-    	$('#edit_span_naver').click(function(){
+    	$('.btn_span_naver').click(function(){
     		console.log('네이버 클릭 확인');
     		
     		$("#naver_id_login_anchor").get(0).click();

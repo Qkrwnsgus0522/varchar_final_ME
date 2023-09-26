@@ -8,10 +8,16 @@
     <title>Var茶 | 홈</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- 파비콘 태그 -->
     <try:favicon/>
     <!-- 링크 부분 태그 -->
     <try:link/>
+    <style type="text/css">
+    	.icon:hover {
+    		cursor: pointer;
+    	}
+    </style>
   </head>
   <body class="goto-here">
      <!-- 헤더 부분 태그 -->
@@ -25,7 +31,7 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="green"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
+				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
 	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
 	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
 	              <p><a href="teaListPage.do" class="btn btn-primary">Feel Healing</a></p>
@@ -41,7 +47,7 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
-				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="green"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
+				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
 				  <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
 	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
 	              <p><a href="teaListPage.do" class="btn btn-primary">Feel Healing</a></p>
@@ -64,7 +70,7 @@
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-shipped"></span>
+            		<span class="fa-solid fa-mug-hot"></span>
               </div>
               <div class="media-body">
                 <h3 class="heading">var茶에 대해</h3>
@@ -75,7 +81,7 @@
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-diet"></span>
+            		<span class="fa-brands fa-instagram"></span>
               </div>
               <div class="media-body">
                 <h3 class="heading">Instagram</h3>
@@ -85,8 +91,8 @@
           </div>
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-award"></span>
+              <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2" onclick="window.open('https://www.youtube.com/embed/WeUNf3Hsj_o', 'window_name', 'width=1000,height=560,location=no,status=no,scrollbars=yes')">
+            		<span class="fa-brands fa-youtube"></span>
               </div>
               <div class="media-body">
                 <h3 class="heading">Youtube</h3>
@@ -98,7 +104,7 @@
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
-            		<span class="flaticon-customer-service"></span>
+            		<span class="fa-solid fa-cake-candles"></span>
               </div>
               <div class="media-body">
                 <h3 class="heading">var茶 탄생기</h3>
@@ -167,7 +173,7 @@
           	<span class="subheading">Best Price For You</span>
             <h2 class="mb-4">Deal of the day</h2>
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-            <h3><a href="#">Spinach</a></h3>
+            <h3><a href="#">Since 07 June 2023</a></h3>
             <span class="price">$10 <a href="#">now $5 only</a></span>
             <div id="timer" class="d-flex mt-5">
 						  <div class="time" id="days"></div>
@@ -198,33 +204,32 @@
             <div class="carousel-testimony owl-carousel">
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"></div>
-                  <div class="text text-center">
-					<p class="name">테아닌</p>
-					<span class="position">천연진정제, 테아닌</span><br><br>
-                    <p class="mb-5 pl-4 line">차를 마시면 긴장이 완화되고 기분이 느긋해지며 침착해지는 것을 느낄 수 있는데, 이는 테아닌이 뇌신경 전달물질을 조절하고 신경계를 안정시켜 긴장을 이완시키기 때문입니다.</p>
-                  </div>
-                </div>
-              </div>
-
-			  <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"></div>
-                  <div class="text text-center">
-					<p class="name">카테킨</p>
-					<span class="position">다이어트에 효과적인 카테킨</span><br><br>
-                    <p class="mb-5 pl-4 line">카테킨은 혈액중의 포도당, 지방산, 콜레스테롤의 농도를 감소시켜 지방합성을 억제하고 지방분해를 촉진해 줍니다.</p>
-                  </div>
-                </div>
-              </div>
-
-			  <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"></div>
+                  <div class="user-img mb-5" style="background-image: url(images/banner-1.jpg)"></div>
                   <div class="text text-center">
 					<p class="name">카페인</p>
 					<span class="position">사랑의 묘약, 카페인</span><br><br>
-                    <p class="mb-5 pl-4 line">사랑의 묘약, 카페인</p>
+                    <p class="mb-5 pl-4 line">대부분의 차에는 카페인이 함유되어 있습니다. 카페인은 중추 신경 체계를 자극하며 활기를 불어넣고 집중력을 증가시키는데 도움을 줍니다.</p>
+                  </div>
+                </div>
+              </div>
+
+			  <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/banner-2.jpg)"></div>
+                  <div class="text text-center">
+					<p class="name">폴리페놀</p>
+					<span class="position">노화 지연, 폴리페놀</span><br><br>
+                    <p class="mb-5 pl-4 line">차에는 폴리페놀이 풍부하게 함유되어 있습니다. 이들은 강력한 항산화제로 작용하여 자유 라디칼로부터 세포를 보호하고 노화를 지연시킬 수 있습니다.</p>
+                  </div>
+                </div>
+              </div>
+
+			  <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/banner-3.jpg)"></div>
+                  <div class="text text-center">
+					<p class="name">카테킨</p>
+					<span class="position">풍부한 항산화, 카테킨</span><br><br>
 					<p class="mb-5 pl-4 line">카페인을 적당히 복용하면 중추신경계를 흥분시켜 정신이 맑아지고 졸음이 없어지며 사고력이 향상됩니다.</p>
                   </div>
                 </div>
@@ -232,22 +237,22 @@
 
 			  <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"></div>
+                  <div class="user-img mb-5" style="background-image: url(images/banner-4.jpg)"></div>
                   <div class="text text-center">
 					<p class="name">테아닌</p>
 					<span class="position">천연진정제, 테아닌</span><br><br>
-                    <p class="mb-5 pl-4 line">차를 마시면 긴장이 완화되고 기분이 느긋해지며 침착해지는 것을 느낄 수 있는데, 이는 테아닌이 뇌신경 전달물질을 조절하고 신경계를 안정시켜 긴장을 이완시키기 때문입니다.</p>
+                    <p class="mb-5 pl-4 line">테아닌은 차에 함유된 아미노산으로, 스트레스 감소와 집중력 향상을 돕는 효과가 있으며, 차를 마실 때 느끼는 안정감과 편안함을 제공합니다.</p>
                   </div>
                 </div>
               </div>
 
 			  <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"></div>
+                  <div class="user-img mb-5" style="background-image: url(images/banner-5.jpg)"></div>
                   <div class="text text-center">
-					<p class="name">테아닌</p>
-					<span class="position">천연진정제, 테아닌</span><br><br>
-                    <p class="mb-5 pl-4 line">차를 마시면 긴장이 완화되고 기분이 느긋해지며 침착해지는 것을 느낄 수 있는데, 이는 테아닌이 뇌신경 전달물질을 조절하고 신경계를 안정시켜 긴장을 이완시키기 때문입니다.</p>
+					<p class="name">비타민과 미네랄</p>
+					<span class="position">건강 유지, 비타민 미네랄</span><br><br>
+                    <p class="mb-5 pl-4 line">차에는 비타민 C, 비타민 B, 칼슘, 칼륨, 마그네슘 등의 미네랄과 비타민이 함유되어 있습니다. 이들은 전반적인 건강을 유지하는 데 필요합니다.</p>
                   </div>
                 </div>
               </div>
