@@ -172,6 +172,9 @@
 	   	text-overflow: ellipsis;
 	   	white-space: nowrap;
     }
+    .primary-btn {
+    	margin-left: 14px; 
+    }
     </style>
   </head>
   <body class="goto-here">
@@ -197,22 +200,6 @@
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>${ teaData.teaName }</h3>
-    				<div class="rating d-flex">
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2">5.0</a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-							</p>
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">별점</span></a>
-							</p>
-							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">판매량</span></a>
-							</p>
-						</div>
     				<p class="price"><span>${ teaData.teaPrice } 원</span></p>
     				<p>${ teaData.teaContent }</p>
     					<div class="tag-widget post-tag-container mb-5 mt-5">
@@ -240,9 +227,6 @@
 	             	</span>
 	             	</div>
 	          	<div class="w-100"></div>
-	          	<div class="text">
-	          		<p style="color: #000;">600 kg available</p> <!-- 판매 상태하면 될듯? 아마동?? -->
-	          	</div>
 			<p>
           		<button type="submit" class="primary-btn">Add to Cart</button> <!-- 카트 추가 버튼 -->
           		

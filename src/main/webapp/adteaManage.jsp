@@ -29,7 +29,8 @@
 <!-- inject:css -->
 <link rel="stylesheet" href="Ad/css/vertical-layout-light/style.css">
 <!-- endinject -->
-<link rel="shortcut icon" href="Ad/images/favicon.png" />
+<!-- 파비콘 태그 -->
+<try:favicon/>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- 스윗알랏 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
