@@ -98,26 +98,14 @@ public class AdminTeaController {
 	}
 	
 	// --------------------------------- 카테고리 추가 ---------------------------------
-	@RequestMapping(value = "/insertCategory.do", method=RequestMethod.GET)
-	public String insertCategoryPage(CategoryVO categoryVO) {
-		
-		/*
-		 * if(categoryService.insert(categoryVO)) {
-		 * 
-		 * }
-		 */
-		
-		return "";
-	}
-
-	@RequestMapping(value = "/insertCategory.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/insertCategory.do")
 	public String insertCategory(CategoryVO categoryVO) {
 		
 		if(categoryService.insert(categoryVO)) {
 			
 		}
 		
-		return "admin.do";
+		return "redirect:admin.do";
 	}
 	
 	// --------------------------------- 카테고리 삭제 ---------------------------------
@@ -136,7 +124,7 @@ public class AdminTeaController {
 			}
 		}
 
-		return "admin.do";
+		return "redirect:admin.do";
 	}
 	
 	// --------------------------------- 카테고리 변경 ---------------------------------
@@ -158,7 +146,7 @@ public class AdminTeaController {
 			
 		}
 		
-		return "admin.do";
+		return "redirect:admin.do";
 	}
 	
 	
@@ -217,7 +205,7 @@ public class AdminTeaController {
 		}
 		
 		
-		return "adminTea.do";
+		return "redirect:adminTea.do";
 	}
 	
 	// --------------------------------- 상품 변경 ---------------------------------
@@ -234,7 +222,7 @@ public class AdminTeaController {
 		}
 		
 		
-		return "adminTea.do";
+		return "redirect:adminTea.do";
 	}
 	
 

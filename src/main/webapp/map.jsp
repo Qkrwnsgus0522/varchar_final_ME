@@ -34,22 +34,22 @@
           <div class="w-100"></div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-	            <p><span>주소:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+	            <p><h5>주소</h5>서울특별시 강남구 테헤란로 26길 12 제일비전타워 13층</p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-	            <p><span>번호:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+	            <p><h5>번호</h5>02-538-0021</p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-	            <p><span>이메일:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	            <p><h5>이메일</h5>varchar@gmail.com</p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-	            <p><span>웹사이트</span> <a href="#">yoursite.com</a></p>
+	            <p><h5>웹사이트</h5>www.varchar.com</p>
 	          </div>
           </div>
         </div>

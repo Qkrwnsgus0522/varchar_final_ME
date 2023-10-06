@@ -82,14 +82,14 @@
           <div class="row">
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
-                <div class="row">
+                
                   <div class="col-md-6">
                     <div class="card-body">
                       <h4 class="card-title">후기 해시태그 추가/삭제/수정</h4>
                       <p class="card-description">Add class <code>.btn-{color}</code> for buttons in theme colors</p>
                       <div class="template-demo">
 									  <div class="form-group">
-										<h5><strong>상품 카테고리 선택 [1) 카테코리를 먼저 지정한다.]</strong></h5>
+										<h5><strong>상품 카테고리 선택</strong></h5>
 										<select class="form-control" id="selectCategory">
 										<option value="선택하세요" id="none" disabled selected hidden>카테고리 선택</option>
 										<c:forEach var="categoryData" items="${categoryDatas}">
@@ -98,35 +98,26 @@
 										</select>
 									</div>
 										<div class="form-group">
-										<h5><strong>상품 선택 [2) 위에서 나눈 카테고리 별로 상품이 출력되게 한다.]</strong></h5>
+										<h5><strong>상품 선택</strong></h5>
 										<select class="form-control" id="selectTea"></select> <br>
 										<button type="button" id="selectbutton" class="btn btn-outline-primary">상품 리뷰 조회</button>		
 									</div>
 									<div class="form-group">
-										<h5><strong>리뷰 선택 [3) 해당 상품의 리뷰들을 출력한다.]</strong></h5>
+										<h5><strong>리뷰 선택</strong></h5>
 										<select class="form-control" id="selectReview"></select> <br>
 										<button type="button" id="selectRwbutton" class="btn btn-outline-warning">리뷰 해시태그 조회</button>	
 									</div>
                     	<form id="hashTagForm" method="post" action="admin.jsp" onsubmit="return false;">
                     	<div id="hashTagContainer" class="template-demo">
-                         </div> <br>
+                         </div> 
+                         <div id="buttonContainer" class="template-demo"></div><br>
+                         <div id="saveContainer" class="template-demo">
                         <button type="button" class="btn btn-primary" id="btnSave" >저장(Save)</button>
+                        </div>
                         </form>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="card-body">
-                      <h4 class="card-title">해시태그 입력란</h4>
-                      <p class="card-description">Add class <code>.btn-rounded</code></p>
-                      <div class="template-demo">
-                    	<div id="hashTagMaker" class="template-demo">
-                        <button type="button" id="addHashTag" class="btn btn-dark btn-rounded btn-fw">직접 입력</button>
-                         </div> <br>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -176,6 +167,17 @@ $("#selectCategory").change(function() {
 			 console.log(result);
 	         $('#selectTea').empty();
 			   var teaInfo = result;
+			   var hashtagContainer = $("#hashTagContainer");
+			   var buttonContainer = $("#buttonContainer");
+			   var saveContainer = $("#saveContainer");
+			   if(teaInfo.length == 0){
+				   alert("해당 카테고리에 상품이 존재하지 않습니다.");
+				   $('#selectTea').empty();
+				   hashtagContainer.empty(); // hashtagContainer 비우기
+				   buttonContainer.empty(); // buttonContainer 비우기
+				   saveContainer.css("display", "none");
+				   return;
+			   }
 			   var firstItem = result[0];
 			    $('#teaNum').attr("value",firstItem.teaNum);
 			    $('#teaName').attr("value",firstItem.teaName);
@@ -215,7 +217,8 @@ $("#selectCategory").change(function() {
 
 $("#selectbutton").click(function () {
 	  var tea = $("#selectTea").val();
-
+	  var hashtagContainer = $("#hashTagContainer");
+	  var buttonContainer = $("#buttonContainer");
 	  $.ajax({
 	    url: "selectReview.do",
 	    data: {
@@ -226,7 +229,9 @@ $("#selectbutton").click(function () {
 	    success: function (result) {
 	    	  console.log(result);
 	    	  $('#selectReview').empty();
-
+	    	  hashtagContainer.empty();
+			  buttonContainer.empty();
+			  $('#saveContainer').css("display","none");
 	    	  if (result && result.length > 0) {
 	    	    var firstRw = result[0];
 	    	    $('#reviewNum').attr("value", firstRw.reviewNum);
@@ -245,13 +250,13 @@ $("#selectbutton").click(function () {
 
 	    	      $('#selectReview').append(optRwElement);
 	    	      $('#selectRwbutton').css('display', 'block');
-	    	      $('#addHashTag').css('display', 'block');
 	    	    }
 	    	  } else {
 	    	    alert("해당 상품은 리뷰가 없네용..ㅎㅎ");
 	    	    $('#selectRwbutton').css('display', 'none');
 	    	    $('#addHashTag').css('display', 'none');
 	    	    $('#hashTagContainer').empty();
+	    	    $('#saveContainer').css("display","none");
 	    	  }
 	    	},
 	    error: function (error) {
@@ -272,7 +277,11 @@ $("#selectRwbutton").click(function () {
 	    success: function (result) {
 	      console.log(result);
 	      var hashtagContainer = $("#hashTagContainer");
+	      var buttonContainer = $("#buttonContainer");
+	      var saveContainer = $("#saveContainer");
 	      hashtagContainer.empty();
+	      buttonContainer.empty();
+	      saveContainer.css("display", "block");
 	      var hashtags = result;
 
 	      if (hashtags.length > 0) {
@@ -296,10 +305,15 @@ $("#selectRwbutton").click(function () {
 	          hashtagContainer.append(tagElement);
 	        }
 	      } else {
+	    	  var tagElement = $("<strong>해당 리뷰의 해시태그가 없네용..ㅎㅎ</strong>")
+	            .css("display", "block");
+	          hashtagContainer.append(tagElement);
+	          saveContainer.css("display", "none");
 	        console.log("선택된 상품에 대한 해시태그가 없습니다.");
 	      }
 	    },
 	    error: function (error) {
+	      	
 	      console.log(error);
 	    }
 	  });
@@ -309,22 +323,7 @@ $("#selectRwbutton").click(function () {
 	  var buttonStyles = ["btn-success", "btn-warning", "btn-info", "btn-dark"];
 	  return buttonStyles[Math.floor(Math.random() * buttonStyles.length)];
 	}
-</script>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function () {
-	  const hashTagMaker = document.getElementById("hashTagMaker");
 
-	  // 페이지 로드 시 "hashTagMaker" <div> 영역 숨기기
-	  hashTagMaker.style.display = "none";
-
-	  const selectRwbutton = document.getElementById("selectRwbutton");
-
-	  // "selectRwbutton" 버튼이 클릭될 때 이벤트 리스너를 추가
-	  selectRwbutton.addEventListener("click", function () {
-	    // "selectRwbutton" 버튼이 클릭되었을 때 "hashTagMaker" 표시
-	    hashTagMaker.style.display = "block";
-	  });
-	});
 </script>
 <script>
         // 예비 스크립트
@@ -343,21 +342,17 @@ hashTagContainer.addEventListener("click", function(event) {
     	 // nextElementSibling, nextSibling 모두 같은 노드 레벨의 다음 값을 가져온다.
     	 // 다만 Element는 Element(요소)만 가져오고, nextSibling은 공백이든 텍스트든 가리지 않고 다음값을 가져온다.
          if (!containerDiv || !containerDiv.classList.contains("hashTagItem")) {
-             // 버튼이 아직 추가되지 않았으면 수정하기 버튼과 삭제하기 버튼을 추가
-             var editButton = document.createElement("button"); // <button> 생성
-             editButton.textContent = "수정"; // 브라우저에서 "수정"이라는 글자의 버튼이 나오도록
-             editButton.classList.add("btn", "btn-outline-dark", "btn-sm"); // 버튼 디자인 및 색깔 지정
+             // 버튼이 아직 추가되지 않았으면 삭제하기 버튼을 추가 (관리자는 오직 리뷰 해시태그를 삭제만 가능토록)
 
              var deleteButton = document.createElement("button"); // <button> 생성
              deleteButton.textContent = "삭제"; // 브라우저에서 "삭제"라는 글자의 버튼이 나오도록
              deleteButton.classList.add("btn", "btn-outline-danger", "btn-sm"); // 버튼 디자인 및 색깔 지정
 
-             // 위의 수정, 삭제 버튼들을 담아낼 hashTagItem이라는 <div> 생성 
+             // 위의 삭제 버튼을 담아낼 hashTagItem이라는 <div> 생성 
              containerDiv = document.createElement("div");
              containerDiv.classList.add("hashTagItem");
 
-             // <div class="hashTagItem">의 하위요소 (자식) 으로 들어가게 설정 --> <div class="hashTagItem"> *버튼들이 들어갈 공간* </div>
-             containerDiv.appendChild(editButton);
+             // <div class="hashTagItem">의 하위요소 (자식) 으로 들어가게 설정 --> <div class="hashTagItem"> *삭제 버튼이 들어갈 공간* </div>
              containerDiv.appendChild(deleteButton);
 
              // div 요소를 <input> 요소 앞에 추가
@@ -368,38 +363,7 @@ hashTagContainer.addEventListener("click", function(event) {
              containerDiv.remove();
              isButtonVisible = false;
          }
-    	 
-             editButton.addEventListener("click", function() {
-            	 event.stopPropagation();
-            	 var fixTag = prompt("수정할 해시태그를 입력하세요.")
-				 var inputElements = hashTagContainer.querySelectorAll("input[type='button']"); // 유효성 검사를 위해 해시태그 입력란 내 모든 input 요소 찾기
-				 console.log(inputElements);
-                if (Validation.isSpecialCharacterOrNumber(fixTag)) { // 이쪽의 Validation은 script 하단쪽에 모듈화 시킨 상태
-                alert("특수 문자나 숫자는 허용되지 않습니다.");
-                return;
-               } else if (Validation.isMaxLengthExceeded(fixTag, 15)) { // 이미 해시태그를 입력해서 추가하는 곳에 유사한 유효성 검사식이 작성되었기 때문
-                alert("해시태그는 총 15자까지만 가능합니다.");
-                return;
-               } else if (Validation.isNullOrWhitespace(fixTag)) { // js파일 임포트하는거 몰라서... ㅎㅎ ㅈㅅ
-                alert("공백은 허용하지 않습니다.");
-                return; // 여기까지가 해시태그를 입력해서 추가했을 때의 유효성 검사식 모듈화
-                
-               //======================== 여기서 부터 해시태그 수정 자체 유효성 검사식 ===============================
-            	   
-               } else if (fixTag === clickedElement.value){ // 나중에 js 너무 길어진다 싶으면 저희 webapp 폴더 내 js 폴더에 넣어서 가독성 높이고 임포트/익스포트 하는 방향으로 고려하겠음
-            	alert("기존의 해시태그와 다른 해시태그를 입력해주세요.");
-            	return;
-               } else if (hashZungBok(fixTag, inputElements)){ // 위에서 선언한 inputElements 사용 -> 이렇게 안하면 일일히 js에서 for문 돌려야ㅐ한다
-            	  alert("해당 상품에 동일한 해시태그가 존재합니다.");
-            	  return;
-               }
-                 // 수정하기 버튼을 클릭했을 때 수행할 동작을 여기에 추가
-                 clickedElement.value = fixTag; // clickedElement -> <input name="teaHashTagName">
-                 console.log("수정 완료시"); // 콘솔로그로 잘 되는 지 확인 + 위의 메서드는 기존의 아래의 js식에서 진행된 newhashTag를 fixTag로 고치는 것
-                 alert("수정이 완료되었습니다!.");
-                 return true;
-             });
-         
+    	          
              deleteButton.addEventListener("click", function() {
             	 event.stopPropagation();
                  // 삭제하기 버튼을 클릭했을 때 수행할 동작을 여기에 추가
@@ -417,99 +381,7 @@ hashTagContainer.addEventListener("click", function(event) {
      }
  });
 
-// 기존 관리자 페이지에서 제공하는 버튼 디자인 배열 : 후에 해시태그 입력시 밑 배열 디자인 중 하나가 랜덤으로 배정
-var classNames = ["btn-success", "btn-warning","btn-info", "btn-dark"];
-document.getElementById("addHashTag").addEventListener("click", function() {
-	// 해시태그 입력란을 찾기
-    var hashTagContainer = document.getElementById("hashTagContainer");
-    
-    // 해시태그 입력란 안의 모든 <input> 요소를 찾기
-    var inputElements = hashTagContainer.querySelectorAll("input[type='button']");
-    
-    // 현재의 해시태그 개수를 확인
-    var currentHashTagCount = inputElements.length;
-    
-    // 만약 3개를 초과한다면 경고 메시지를 표시 및 빠꾸시키기
-    if (currentHashTagCount >= 3) {
-        alert("한 상품당 해시태그는 최대 3개까지입니다.");
-        return;
-    }
-	
-    var newHashTag = prompt("추가할 해시태그를 입력하세요:");
-    
-    // 새로운 해시태그 중복 검사
-    if (hashZungBok(newHashTag, inputElements)) {
-        alert("입력하신 해시태그가 이미 존재합니다.");
-        return;
-    }
-    
-    if (newHashTag) {
-    	// form에 담겨서 C에게 제출해야 하므로 <input>태그를 만드는 과정
-        var hashTagElement = document.createElement("input");
-    	// <>를 input으로 설정해준다.
-        hashTagElement.type = "button";
-    	// 타입은 버튼으로 설정
-        hashTagElement.style.display = "block";
-    	// 디자인은 블록으로
-        // 랜덤으로 버튼 클래스 (버튼 디자인) 선택
-        var randomIndex = Math.floor(Math.random() * classNames.length);
-        hashTagElement.className = "btn " + classNames[randomIndex];
-        // 상단에 설정해둔 var classNames 배열의 인덱스 값중 하나가 랜덤으로 선택됨
-        hashTagElement.setAttribute('name','teaHashtagContent')
-        // 실제로 Form 영역에 담아서 제출해야 하므로, name의 인자를 M이 설정해둔 인자명과 동일하게 설정해서 보내주기 위한 메서드 (setAttribute)
-        hashTagElement.value = newHashTag;
-        // 해시태그에 특수 문자나 숫자 막기      
-        if (/[\d!@#$%^&*()_+{}\[\]:;<>,.?~\\|'"`=\/\-]/.test(newHashTag)) {
-            alert("특수 문자나 숫자는 허용되지 않습니다.");
-            return;
-        }
-        else if(newHashTag.length > 15){
-        	alert("해시태그는 총 15자까지만 가능합니다.");
-        	return;	
-        }
-        else if(newHashTag === null || newHashTag.trim() === ''){
-        	alert("공백은 허용하지 않습니다.");
-        	return;
-        }
-        document.getElementById("hashTagContainer").appendChild(hashTagElement);
-//        var hashTagField = document.getElementById("hashTagField");
-//        var hiddenInput = document.createElement("input");
-//        hiddenInput.type = "hidden";
-//        hiddenInput.name = "hashtags[]"; 
-//        hiddenInput.value = newHashTag;
- //       hashTagField.appendChild(hiddenInput);
-    }
-});
 
-function hashZungBok(newHashTag, inputElements) {
-    // Set을 사용하여 중복된 해시태그를 확인
-    var hashTags = new Set();
-    
-    // 현재 입력된 해시태그를 Set에 추가
-    inputElements.forEach(function(inputElement) {
-        var value = inputElement.value;
-        hashTags.add(value);
-    });
-
-    // 새로운 해시태그가 이미 존재하는지 확인
-    return hashTags.has(newHashTag);
-}
-
-// 해시태그 수정시 똑같은 유효성 검사가 들어가기 때문에 별도로 모듈화 시킴
-const Validation = {
-    isSpecialCharacterOrNumber: function(inputString) {
-    // 특수문자와 기호 막기
-        return /[\d!@#$%^&*()_+{}\[\]:;<>,.?~\\|'"`=\/\-]/.test(inputString);
-    },
-    isMaxLengthExceeded: function(inputString, maxLength) {
-    // 최대 글자수 제한	
-        return inputString.length > maxLength;
-    },
-    isNullOrWhitespace: function(inputString) {
-    // 공백 제한	
-        return inputString === null || inputString.trim() === '';
-    }
-};
 
 $('#btnSave').on("click", function(){
 	console.log('버튼 클릭됨');
@@ -556,6 +428,16 @@ $('#btnSave').on("click", function(){
 	
 	
 });
+
+</script>
+<script type="text/javascript">
+
+document.addEventListener("DOMContentLoaded", function () {
+	  const saveContainer = document.getElementById("saveContainer");
+
+	  // 페이지 로드 시 "저장(Save)" <div> 영역 숨기기
+	  saveContainer.style.display = "none";
+	});
 
 </script>
 </body>

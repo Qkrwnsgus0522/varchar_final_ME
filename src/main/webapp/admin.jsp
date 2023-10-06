@@ -98,8 +98,8 @@
                                   <table class="table select-table">
                                     <thead>
                                       <tr>
-                                        <th><h6>차 종류</h6></th>
-                                        <th><h6>재고현황</h6></th>
+                                        <th><h6>카테고리</h6></th>
+                                        <th><h6>판매현황</h6></th>
                                         <th><h6>상태</h6></th>
                                       </tr>
                                     </thead>
@@ -109,7 +109,7 @@
                                       <tr>
                                         <td>
                                           <div class="d-flex ">
-                                            <img src="Ad/images/faces/face1.jpg" alt="">
+                                            <img src="Ad/images/default.png" alt="카테고리 이미지">
                                             <div>
                                               <h6 id="cateName"><a href="adminCategory.do?categoryNum=${categoryData.categoryNum}&categoryName=${categoryData.categoryName}">${categoryData.categoryName}</a></h6>
                                             </div>
@@ -117,7 +117,7 @@
                                         </td>
                                         <td>
                                           <div>
-                                           <p>여기 카테고리당 재고 쓸거냐</p>
+                                           <p>총 ${categoryData.buyCnt}개</p>
                                           </div>
                                         </td>
                                         

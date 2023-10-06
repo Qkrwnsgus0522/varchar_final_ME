@@ -34,7 +34,9 @@
 	}
 	
 	.tagcloud a {
-		font-size: 13px;
+		background-color: #4A55A2 !important;
+	    backdrop-filter: blur(10px);
+	    color: #FFFFFF;
 	}
 	</style>
 	<script type="text/javascript">
@@ -66,7 +68,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="main.do">Tea</a></span> <span>Products</span>
 					</p>
-					<h1 class="mb-0 bread">TeaLists</h1>
+					<h1 class="mb-0 bread">상품 목록</h1>
 				</div>
 			</div>
 		</div>
@@ -108,7 +110,7 @@
 							<!-- 반복 시작점 -->
 							<div class="product edit_product_${ teaData.teaNum }">
 								<a href="teaDetailPage.do?teaNum=${ teaData.teaNum }&searchName=DETAIL" class="img-prod"><img class="img-fluid" src="${ teaData.imageUrl }" alt="Colorlib Template">
-									<div class="tagcloud ftco-animate edit_hashtag edit_hashtag_${ teaData.teaNum }" style="position: absolute; top: 25%; left: 0; right: 0; bottom: 0; text-align: center; vertical-align: middle;">
+									<div class="tagcloud ftco-animate edit_hashtag edit_hashtag_${ teaData.teaNum }" style="position: absolute; top: 15%; left: 0; right: 0; bottom: 0; text-align: center; vertical-align: middle;">
 										<c:forEach var="teaHashtag" items="${ teaData.teaHashtags }">
 											<br>
 											<a href="teaListPage.do?teaHashtagContent=${ teaHashtag.teaHashtagContent }" class="tag-cloud-link" style="background: #ffffff"># ${ teaHashtag.teaHashtagContent }</a>
@@ -123,7 +125,12 @@
 									<div class="d-flex">
 										<div class="pricing">
 											<p class="price">
-												<span>${ teaData.teaPrice } ₩</span>
+												<c:if test="${ teaData.teaStatus eq 0 }">
+													<span>${ teaData.teaPrice } ₩</span>
+												</c:if>
+												<c:if test="${ teaData.teaStatus eq 1 }">
+													<span>판매 중단</span>
+												</c:if>
 											</p>
 										</div>
 									</div>

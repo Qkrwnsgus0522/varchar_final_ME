@@ -176,7 +176,7 @@
                                         </td>
                                         <td>
                                           <div class="d-flex ">
-                                            <img src="images/faces/face1.jpg" alt="">
+                                            <img src="Ad/images/soldout.jpg" alt="품절 이미지">
                                             <div>
                                               <h6>상품X</h6>
                                               <p>해당되는 상품이 존재하지 않습니다</p>

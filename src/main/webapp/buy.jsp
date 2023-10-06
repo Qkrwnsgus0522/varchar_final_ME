@@ -12,6 +12,14 @@
     <try:favicon/>
     <!-- 링크 부분 태그 -->
     <try:link/>
+    <style type="text/css">
+    #payment-request-button{
+    	margin-left: 25px;
+    }
+    
+    
+    
+    </style>
   </head> 
   <body class="goto-here">
 	<!-- 헤더 부분 태그 -->
@@ -136,8 +144,65 @@
                 <div class="col-md-6">
 	                <div class="form-group" style="margin-bottom: 75px;">
 	                	<label for="lastname">주소 </label>
-	                  <!-- 주소 API 적용 -->
-	                  <try:addressAPI/>
+	                  <!-- kakao 우편번호 서비스 -->
+                <script>
+              		var flagAddress = false;
+                      
+                    function daumPost() {
+                      	new daum.Postcode({
+                      		oncomplete: function(data) {
+                      			var fullAddr = '';
+                      			var extraAddr = '';
+                      			
+                      			//도로명 주소를 선택했을 경우
+                      			if (data.userSelectedType === 'R') {
+                      				fullAddr = data.roadAddress;
+                      			//지번 주소를 선택했을 경우
+                      			} else {
+                      				fullAddr = data.jibunAddress;
+                      			}
+                      			//도로명일때 조합
+                      			if (data.userSelectedType === 'R') {
+                      				//법정동명 추가
+                      				if (data.bname !== '') {
+                      					extraAddr += data.bname;
+                      				}
+                      				//건물명 추가
+                      				if (data.buildingName !== '') {
+                      					extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                      				}
+                      				//괄호 추가
+                      				fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
+                      			}
+                      			$("#inputAddress").val(fullAddr);
+                      			$("#inputAddress").attr("readonly", false);
+                      			if ($("#inputAddress").val() == fullAddr) {
+                      				$("#spanAddress").html(' <i class="fa-solid fa-check"></i>');
+                            	    $("#spanAddress").css("color", "green");
+                        		   	flagAddress = true;
+                      			} else {
+                      				$("#spanAddress").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
+                        		   	$("#spanAddress").css("color", "red");
+                            	    flagAddress = false;
+                      			}
+                      			$("#inputAddress").attr("readonly", true);
+                      			$("#inputAddressDetail").focus();
+                      			console.log(flagAddress);
+                      		},
+                      		theme: {
+                                bgColor: "#23512E", //바탕 배경색
+                                searchBgColor: "#FFFFFF", //검색창 배경색
+                                contentBgColor: "#FFFFFF", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+                                //pageBgColor: "", //페이지 배경색
+                                textColor: "#222222" //기본 글자색
+                                //queryTextColor: "", //검색창 글자색
+                                //postcodeTextColor: "", //우편번호 글자색
+                                //emphTextColor: "", //강조 글자색
+                                //outlineColor: "", //테두리
+                            }
+                      	}).open();
+                    }
+                </script>
 	                </div>
                 </div>
 	            </div>
@@ -153,8 +218,7 @@
 	<div style="width: 1000px; height: 300px; margin: 0 auto;">
 	<div id="payment-method">
 	</div>
-	<button id="payment-request-button">결제하기</button>
-    
+	<button id="payment-request-button" class="btn btn-primary py-3 px-4">결제하기</button>
     
 <%--     <!-- 총 가격 구하기 -->
     <c:set var="sum" value="0" />
@@ -188,7 +252,6 @@
         paymentWidget.requestPayment({
         	orderId: generateRandomString(),
         	orderName: '${ memberId }',
-            //successUrl: window.location.origin + "/success.jsp",
             successUrl: "http://localhost:8088/app/paySuccess.do",
             failUrl: "http://localhost:8088/app/payFail.jsp",
         });
@@ -205,7 +268,10 @@
       </div>
     </section>
 	<!-- 주문자 정보 섹션 끝-->
-	
+	<br>
+	<br>
+	<br>
+	<br>
 
 	<!-- 커스텀 태그 적용하기 -->
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">

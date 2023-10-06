@@ -51,7 +51,7 @@
                   <div class="col-md-12 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch d-md-flex">
                       <a href="reviewDetailPage.do?reviewNum=${ reviewData.reviewNum }" class="block-20">
-                      	<img alt="" src="${ reviewData.imageUrl }" style="width: 250px; height: 250px;">
+                      	<img alt="" src="${ reviewData.imageUrl }" style="width: 250px; height: 200px;">
                       </a>
                       <div class="text d-block pl-md-4">
                         <div class="meta mb-3">

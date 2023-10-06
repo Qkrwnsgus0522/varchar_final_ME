@@ -51,11 +51,14 @@
               <a class="nav-link dropdown-toggle" href="teaListPage.do" id="dropdown04" aria-haspopup="true" aria-expanded="false">티 제품
               </a><!-- nav.category -->
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="teaListPage.do?categoryName=녹차">녹차</a> <!-- nav.category01 -->
+              	<c:forEach var="category" items="${ categorys }">
+              		<a class="dropdown-item" href="teaListPage.do?categoryName=${ category.categoryName }">${ category.categoryName }</a>
+              	</c:forEach>
+              	<!-- <a class="dropdown-item" href="teaListPage.do?categoryName=녹차">녹차</a> nav.category01
                 <a class="dropdown-item" href="teaListPage.do?categoryName=홍차">홍차</a>
                 <a class="dropdown-item" href="teaListPage.do?categoryName=루이보스">루이보스</a>
                 <a class="dropdown-item" href="teaListPage.do?categoryName=우롱차">우롱차</a>
-				<a class="dropdown-item" href="teaListPage.do?categoryName=허브차">허브차</a>
+				<a class="dropdown-item" href="teaListPage.do?categoryName=허브차">허브차</a> -->
               </div>
             </li>
 			  <li class="nav-item"><a href="reviewListPage.do?searchName=ALL" class="nav-link">티 후기</a></li> <!-- nav.review -->

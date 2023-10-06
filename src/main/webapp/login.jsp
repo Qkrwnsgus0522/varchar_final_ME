@@ -335,25 +335,6 @@
 		});
 	</script>
 	
-	<script type="text/javascript">
-		// 비밀번호 유효성 검사
-    	function checkPw() {
- 	  		var nPw = document.getElementById('newPw').value;
-       		var cnPw = document.getElementById('checkNewPw').value;
-                		
-       		if(nPw.length < 8){
-   				alert('비밀번호 설정은 8글자 이상부터 가능합니다.');
-                			
-       			return false;
-       		}
-       		else if( nPw != cnPw ){
-                alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-                			
-                return false;
-            }
-       		return true;
-      	}
-    </script>
     <script type="text/javascript">
     	$('.btn_span_naver').click(function(){
     		console.log('네이버 클릭 확인');
