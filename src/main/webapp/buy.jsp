@@ -50,7 +50,7 @@
 							<div class="col-md-12">
 								<label for="id">아이디<span id="spanId" class="edit-red"> *</span></label>
 								<div class="form-group edit-d-f">
-									<input type="text" id="inputId" name="memberId" value="${ memberVO.memberId }" class="form-control" placeholder="아이디를 입력하세요.">
+									<input type="text" id="inputId" name="memberId" value="${ memberVO.memberId }" class="form-control" readonly>
 								</div>
 							</div>
 							<div class="w-100"></div>

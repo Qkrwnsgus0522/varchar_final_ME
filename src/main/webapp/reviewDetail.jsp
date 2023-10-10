@@ -153,9 +153,8 @@
 		                  <h3 class="heading-1"><a href="#"><b>${recentList.teaName}</b></a></h3>
 		                  <h4 class="heading-1"><a href="#">${recentList.teaContent}</a></h4>
 		                  <div class="meta">
-		                    <div><a href="#"><span class="icon-calendar"></span> ${recentList.teaPrice}</a></div>
-		                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-		                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+		                    <div><a href="#"><span class="icon-money"></span> ${recentList.teaPrice}</a></div>
+		                    <div><a href="#"><span class="icon-chat"></span> ${recentList.categoryName}</a></div>
 		                  </div>
 		                </div>
 		              </div>

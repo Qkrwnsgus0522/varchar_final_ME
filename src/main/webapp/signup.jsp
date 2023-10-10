@@ -242,7 +242,7 @@
     		function checkInputName(){
     			var regexName = /(^[가-힣]{2,5}$)|(^[a-zA-Z]{2,20}(\s[a-zA-Z]{2,20})?$)/;
     			inputName = $("#inputName").val();		
-    			
+    			console.log("name");
     			if (!regexName.test(inputName)) {
     				if (inputName == '') {
     					$("#spanName").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
@@ -268,7 +268,7 @@
     		function checkInputPhone(){
 				var regexPhone = /^010\d{8}$/;
 				inputPhone = $("#inputPhone").val();
-    			
+    			console.log("phone");
     			if (!regexPhone.test(inputPhone)) {
     				if (inputPhone == '') {
     					$("#spanPhone").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
@@ -313,7 +313,7 @@
 			function checkInputEmail(){
 				var regexEmail = /^[A-Za-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
     			inputEmail = $("#inputEmail").val();
-    			
+    			console.log("email");
     			if (!regexEmail.test(inputEmail)) {
     				if (inputEmail == '') {
     					$("#spanEmail").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
@@ -360,7 +360,7 @@
     		// 상세주소 함수
     		function checkInputAddressDetail(){
 				inputAddressDetail = $("#inputAddressDetail").val();		
-    			
+				console.log("adde");
 				if (inputAddressDetail == '') {
 					$("#spanAddressDetail").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
 					$("#spanAddressDetail").css("color", "red");
@@ -384,19 +384,6 @@
 					flagRecaptcha = true;
 				}
 			}
-			
-			// 유효성 flag 변수
-			var flagId = false;
-			var flagPassword1 = false;
-			var flagPassword2 = false;
-			var flagName = false;
-    		var flagEmail = false;
-    		var flagPhone = false;
-    		var flagAddress = false;
-    		var flagAddressDetail = false;
-			var flagRecaptcha = false;
-			
-			...
 			
 			// Submit 유효성 검사
 	    	$("#inputSubmit").on("click", function(){

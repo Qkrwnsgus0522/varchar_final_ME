@@ -120,9 +120,8 @@
 		                  <h3 class="heading-1"><a href="#"><b>${recentList.teaName}</b></a></h3>
 		                  <h4 class="heading-1"><a href="#">${recentList.teaContent}</a></h4>
 		                  <div class="meta">
-		                    <div><a href="#"><span class="icon-calendar"></span> ${recentList.teaPrice}</a></div>
-		                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-		                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+		                    <div><a href="#"><span class="icon-money"></span> ${recentList.teaPrice}</a></div>
+		                    <div><a href="#"><span class="icon-chat"></span> ${recentList.categoryName}</a></div>
 		                  </div>
 		                </div>
 		              </div>
@@ -147,11 +146,6 @@
 	                <a href="reviewListPage.do?searchName=HASHTAG&reviewHashtagContent=${ tag.reviewHashtagContent }" class="tag-cloud-link"># ${ tag.reviewHashtagContent }</a>
               	</c:forEach>
               </div>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
             </div>
           </div>
         </div>

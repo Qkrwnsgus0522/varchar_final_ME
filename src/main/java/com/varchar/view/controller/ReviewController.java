@@ -123,7 +123,14 @@ public class ReviewController {
 
 			model.addAttribute("reviewData", reviewVO);
 		}
+		
+		// 태그 클라우드에 들어갈 해시태그 랭크
+		reviewHashtagVO.setHashTagSearchCondition("RANK");
+		List<ReviewHashtagVO> tagCloud = reviewHashtagService.selectAll(reviewHashtagVO);
+
+		model.addAttribute("tagCloud", tagCloud);
 		System.out.println(reviewVO);
+		System.out.println(tagCloud);
 		return "reviewDetail.jsp";
 	}
 
