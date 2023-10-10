@@ -336,7 +336,11 @@
 				    						<p class="price"><span>${ reviewData.memberName }</span></p>
 				    					</div>
 			    					</div>
-
+			    					<div class="bottom-area d-flex px-3">
+			    						<div class="pricing">
+					    					<p class="price"><span>${ reviewData.memberName }</span></p>
+					    				</div>
+		    						</div>
 		    					</div>
 		    				</div>
 		    			</div>

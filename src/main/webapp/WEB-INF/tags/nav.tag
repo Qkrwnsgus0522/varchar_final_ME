@@ -52,7 +52,9 @@
               </a><!-- nav.category -->
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<c:forEach var="category" items="${ categorys }">
-              		<a class="dropdown-item" href="teaListPage.do?categoryName=${ category.categoryName }">${ category.categoryName }</a>
+              		<c:if test="${ category.categoryName != '해당없음'  }">
+	              		<a class="dropdown-item" href="teaListPage.do?categoryName=${ category.categoryName }">${ category.categoryName }</a>
+              		</c:if>
               	</c:forEach>
               	<!-- <a class="dropdown-item" href="teaListPage.do?categoryName=녹차">녹차</a> nav.category01
                 <a class="dropdown-item" href="teaListPage.do?categoryName=홍차">홍차</a>

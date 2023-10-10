@@ -23,7 +23,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("               ¿Œ≈Õº¡≈Õ ∑Œ±◊ : Ω««‡");
+		System.out.println("               [interceptor] Ïã§Ìñâ");
 		if(modelAndView != null) {
 			modelAndView.addObject("categorys", categoryService.selectAll(null));
 		}

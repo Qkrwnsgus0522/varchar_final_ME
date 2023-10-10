@@ -78,7 +78,6 @@
                   <div class="col-md-6">
                     <div class="card-body">
                       <h4 class="card-title">상품 해시태그 추가/삭제/수정</h4>
-                      <p class="card-description">Add class <code>.btn-{color}</code> for buttons in theme colors</p>
                       <div class="template-demo">
 									  <div class="form-group">
 										<h5><strong>상품 카테고리 선택</strong></h5>
@@ -172,12 +171,12 @@ $("#selectCategory").change(function() {
 			   var optteaNum=teaInfo[i].teaNum;
 			   var optteaName = teaInfo[i].teaName;
 			   console.log(optteaName);
-	                var optionElement = $('<option>' + optteaName + '</option>')
-	                    .attr('value', optteaNum)
-	                    .attr('data-tea-name', optteaName)
+	           var optionElement = $('<option>' + optteaName + '</option>')
+	           .attr('value', optteaNum)
+	           .attr('data-tea-name', optteaName)
 
-	                $('#selectTea').append(optionElement);
-			      }		   
+	           $('#selectTea').append(optionElement);
+			  }		   
 		   },
 		
 		error: function(error){
@@ -246,7 +245,20 @@ $("#selectbutton").click(function () {
 	    }
 	  });
 	});
+	
+$("#selectCategory").on("change", function() {
+	   $("#hashTagContainer").empty();
+	   $("#buttonContainer").empty();
+	   $("#saveContainer").hide();
+	});
 
+$("#selectTea").on("change", function() {
+		   $("#hashTagContainer").empty();
+		   $("#buttonContainer").empty();
+		   $("#saveContainer").hide();
+	});
+	
+	
 	// 랜덤한 버튼 스타일을 얻는 도우미 함수
 	function getRandomStyle() {
 	  var buttonStyles = ["btn-success", "btn-warning", "btn-info", "btn-dark"];
@@ -264,7 +276,7 @@ $("#selectbutton").click(function () {
 	    // 현재의 해시태그 개수를 확인
 	    var currentHashTagCount = inputElements.length;
 	    
-	    // 만약 3개를 초과한다면 경고 메시지를 표시 및 빠꾸시키기
+	    // 만약 3개를 초과한다면 경고 메시지를 표시 및 입력 방지
 	    if (currentHashTagCount >= 3) {
 	        alert("한 상품당 해시태그는 최대 3개까지입니다.");
 	        return;
@@ -280,19 +292,17 @@ $("#selectbutton").click(function () {
 	    }
 	    
 	    if (newHashTag) {
-	    	// form에 담겨서 C에게 제출해야 하므로 <input>태그를 만드는 과정
 	        var hashTagElement = document.createElement("input");
 	    	// <>를 input으로 설정해준다.
 	        hashTagElement.type = "button";
 	    	// 타입은 버튼으로 설정
 	        hashTagElement.style.display = "block";
-	    	// 디자인은 블록으로
-	        // 랜덤으로 버튼 클래스 (버튼 디자인) 선택
+	    	// 디자인은 블록으로 + 랜덤으로 버튼 클래스 (버튼 디자인) 선택
 	        var randomIndex = Math.floor(Math.random() * classNames.length);
 	        hashTagElement.className = "btn " + classNames[randomIndex];
 	        // 상단에 설정해둔 var classNames 배열의 인덱스 값중 하나가 랜덤으로 선택됨
 	        hashTagElement.setAttribute('name','teaHashtagContent')
-	        // 실제로 Form 영역에 담아서 제출해야 하므로, name의 인자를 M이 설정해둔 인자명과 동일하게 설정해서 보내주기 위한 메서드 (setAttribute)
+	        // name의 인자를 M이 설정해둔 인자명과 동일하게 설정해서 보내주기 위한 메서드 (setAttribute)
 	        hashTagElement.value = newHashTag;
 	        // 해시태그에 특수 문자나 숫자 막기      
 	        if (/[\d!@#$%^&*()_+{}\[\]:;<>,.?~\\|'"`=\/\-]/.test(newHashTag)) {
@@ -366,13 +376,13 @@ hashTagContainer.addEventListener("click", function(event) {
                } else if (Validation.isMaxLengthExceeded(fixTag, 15)) { // 이미 해시태그를 입력해서 추가하는 곳에 유사한 유효성 검사식이 작성되었기 때문
                 alert("해시태그는 총 15자까지만 가능합니다.");
                 return;
-               } else if (Validation.isNullOrWhitespace(fixTag)) { // js파일 임포트하는거 몰라서... ㅎㅎ ㅈㅅ
+               } else if (Validation.isNullOrWhitespace(fixTag)) { 
                 alert("공백은 허용하지 않습니다.");
                 return; // 여기까지가 해시태그를 입력해서 추가했을 때의 유효성 검사식 모듈화
                 
                //======================== 여기서 부터 해시태그 수정 자체 유효성 검사식 ===============================
             	   
-               } else if (fixTag === clickedElement.value){ // 나중에 js 너무 길어진다 싶으면 저희 webapp 폴더 내 js 폴더에 넣어서 가독성 높이고 임포트/익스포트 하는 방향으로 고려하겠음
+               } else if (fixTag === clickedElement.value){ 
             	alert("기존의 해시태그와 다른 해시태그를 입력해주세요.");
             	return;
                } else if (hashZungBok(fixTag, inputElements)){ // 위에서 선언한 inputElements 사용 -> 이렇게 안하면 일일히 js에서 for문 돌려야ㅐ한다
@@ -400,8 +410,8 @@ hashTagContainer.addEventListener("click", function(event) {
                  return true;
                  
              });
-     }
- });
+           }
+       });
 
 // 기존 관리자 페이지에서 제공하는 버튼 디자인 배열 : 후에 해시태그 입력시 밑 배열 디자인 중 하나가 랜덤으로 배정
 

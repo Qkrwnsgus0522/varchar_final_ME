@@ -102,7 +102,9 @@
             	<h3 class="heading">Categories</h3>
               <ul class="categories">
                 <c:forEach var="category" items="${ categorys }">
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=${category.categoryName}">${category.categoryName}</a></li>
+                	<c:if test="${ category.categoryName != '해당없음'  }">
+	                	<li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=${category.categoryName}">${category.categoryName}</a></li>
+                	</c:if>
                 </c:forEach>
               </ul>
             </div>

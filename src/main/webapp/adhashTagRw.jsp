@@ -86,7 +86,6 @@
                   <div class="col-md-6">
                     <div class="card-body">
                       <h4 class="card-title">후기 해시태그 추가/삭제/수정</h4>
-                      <p class="card-description">Add class <code>.btn-{color}</code> for buttons in theme colors</p>
                       <div class="template-demo">
 									  <div class="form-group">
 										<h5><strong>상품 카테고리 선택</strong></h5>
@@ -186,29 +185,12 @@ $("#selectCategory").change(function() {
 			   var optteaName = teaInfo[i].teaName;
 			   console.log(optteaName);
 	                var optionElement = $('<option>' + optteaName + '</option>')
-	                    .attr('value', optteaNum)
-	                    .attr('data-tea-name', optteaName)
-
-	                
+	                .attr('value', optteaNum)
+	                .attr('data-tea-name', optteaName)                
 	                $('#selectTea').append(optionElement);
 			
 			      }
-			   
-	           // 새로운 <option>을 추가합니다.
-	      //     $('#teaToDel').append(selteaName);
-			   // 각각의 <input> 엘리먼트에 데이터를 설정합니다.
-			 //  if($('#teaToDel'))
-	        //    $('#teaNum').attr("value",optteaNum);
-	       //     $('#teaName').attr("value",optteaName);
-	       //     $('#teaCnt').attr("value",optteaCnt);
-	       //     $('#teaPrice').attr("value",optteaPrice);
-	       //     $('#teaContent').attr("value",optteaContent);
-		   },
-		   // teaName이 forEach 형식으로 뜨게 하고 싶다.
-		   // 결국엔 배열 형식이기 때문에, 항상 JAVA에서 써오던 for문 방식으로 먼저 체크를 해보자.
-		   // 그리고 TeaVO의 멤버변수 하나하나로 다 받아온 저 result를 teaName만 추출해서 나오게 하도록!
-		   // 오늘 집가서 이거 제대로 끝낸다 스바...
-		
+		   },			
 		error: function(error){
 		    console.log(error);
 	    }
@@ -318,6 +300,30 @@ $("#selectRwbutton").click(function () {
 	    }
 	  });
 	});
+	
+	
+$("#selectCategory").on("change", function() {
+	   $("#selectReview").empty();
+	   $("#selectRwbutton").hide();
+	   $("#hashTagContainer").empty();
+	   $("#buttonContainer").empty();
+	   $("#saveContainer").hide();
+	});
+
+$("#selectTea").on("change", function() {
+	       $("#selectReview").empty();
+	       $("#selectRwbutton").hide();
+		   $("#hashTagContainer").empty();
+		   $("#buttonContainer").empty();
+		   $("#saveContainer").hide();
+	});
+	
+$("#selectReview").on("change", function() {
+	   $("#hashTagContainer").empty();
+	   $("#buttonContainer").empty();
+	   $("#saveContainer").hide();
+});
+	
 	// 랜덤한 버튼 스타일을 얻는 도우미 함수
 	function getRandomStyle() {
 	  var buttonStyles = ["btn-success", "btn-warning", "btn-info", "btn-dark"];

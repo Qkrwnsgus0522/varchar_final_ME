@@ -90,8 +90,10 @@
 					<ul class="product-category">
 						<li><a href="teaListPage.do">전체</a></li>
 						<c:forEach var="category" items="${ categorys }">
-                <li><a href="teaListPage.do?categoryName=${category.categoryName}">${category.categoryName}</a></li>
-                </c:forEach>
+							<c:if test="${ category.categoryName != '해당없음'  }">
+			                	<li><a href="teaListPage.do?categoryName=${category.categoryName}">${category.categoryName}</a></li>
+							</c:if>
+		                </c:forEach>
 					</ul>
 				</div>
 			</div>
