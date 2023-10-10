@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.varchar.biz.category.CategoryService;
 import com.varchar.biz.category.CategoryVO;
+import com.varchar.biz.common.AlertVO;
 import com.varchar.biz.image.ImageService;
 import com.varchar.biz.image.ImageVO;
 import com.varchar.biz.member.MemberService;
@@ -91,26 +92,30 @@ public class AdminTeaController {
 		for(int i = 0; i<teaNums.size(); i++) {
 			teaVO.setTeaNum((Integer.parseInt(teaNums.get(i))));
 			teaService.update(teaVO);
+			
+			AlertVO sweetAlertVO = new AlertVO("상품 카테고리 변경", "상품 카테고리 변경 성공!", null, "success", "admin.do");
+			model.addAttribute("sweetAlert", sweetAlertVO);
 		}
 		
-		return "redirect:admin.do";
+		return "alertTrue.jsp";
 
 	}
 	
 	// --------------------------------- 카테고리 추가 ---------------------------------
 	@RequestMapping(value = "/insertCategory.do")
-	public String insertCategory(CategoryVO categoryVO) {
+	public String insertCategory(CategoryVO categoryVO, Model model) {
 		
 		if(categoryService.insert(categoryVO)) {
-			
+			AlertVO sweetAlertVO = new AlertVO("카테고리 추가", "상품 카테고리 추가 성공!", null, "success", "admin.do");
+			model.addAttribute("sweetAlert", sweetAlertVO);
 		}
 		
-		return "redirect:admin.do";
+		return "alertTrue.jsp";
 	}
 	
 	// --------------------------------- 카테고리 삭제 ---------------------------------
 	@RequestMapping(value = "/deleteCategory.do")
-	public String deleteCategory(CategoryVO categoryVO, TeaVO teaVO) {
+	public String deleteCategory(CategoryVO categoryVO, TeaVO teaVO, Model model) {
 		
 		categoryVO = categoryService.selectOne(categoryVO);
 		
@@ -121,15 +126,18 @@ public class AdminTeaController {
 			teaVO.setTeaCondition("카테고리변경");
 			teaVO.setCategoryNum(categoryVO.getCategoryNum());
 			teaService.update(teaVO);
+			
+			AlertVO sweetAlertVO = new AlertVO("카테고리 삭제", "상품 카테고리 삭제 성공!", null, "success", "admin.do");
+			model.addAttribute("sweetAlert", sweetAlertVO);
 			}
 		}
 
-		return "redirect:admin.do";
+		return "alertTrue.jsp";
 	}
 	
 	// --------------------------------- 카테고리 변경 ---------------------------------
 	@RequestMapping(value = "/updateCategory.do")
-	public String updateCategory(CategoryVO categoryVO, TeaVO teaVO) {
+	public String updateCategory(CategoryVO categoryVO, TeaVO teaVO, Model model) {
 		
 		System.out.println("updateCategory.do 진입 확인");
 		System.out.println("categoryVO" +categoryVO);
@@ -142,11 +150,14 @@ public class AdminTeaController {
 			teaVO.setTeaCondition("카테고리변경");
 			teaVO.setCategoryNum(categoryVO.getCategoryNum());
 			teaService.update(teaVO);
+			
+			AlertVO sweetAlertVO = new AlertVO("카테고리 변경", "상품 카테고리 변경 성공!", null, "success", "admin.do");
+			model.addAttribute("sweetAlert", sweetAlertVO);
 			}
 			
 		}
 		
-		return "redirect:admin.do";
+		return "alertTrue.jsp";
 	}
 	
 	
@@ -162,7 +173,7 @@ public class AdminTeaController {
 	
 	// --------------------------------- 상품 추가 ---------------------------------
 	@RequestMapping(value = "/insertTea.do")
-	public String insertTea(TeaVO teaVO, ImageVO imageVO, HttpServletRequest request) {
+	public String insertTea(TeaVO teaVO, ImageVO imageVO, Model model, HttpServletRequest request) {
 
 		final String path = request.getSession().getServletContext().getRealPath("images");
 
@@ -186,31 +197,36 @@ public class AdminTeaController {
 					
 					imageVO.setImageUrl("images/" + ranFileName);
 					imageService.insert(imageVO);
+					
+					AlertVO sweetAlertVO = new AlertVO("상품 추가", "상품 추가 성공!", null, "success", "adminTea.do");
+					model.addAttribute("sweetAlert", sweetAlertVO);
 				}
 			}
 		}
-		return "redirect:adminTea.do";
+		return "alertTrue.jsp";
 	}
 	
 	// --------------------------------- 상품 삭제 ---------------------------------
 	@RequestMapping(value = "/deleteTea.do")
-	public String deleteTea(TeaVO teaVO) {
+	public String deleteTea(TeaVO teaVO, Model model) {
 		
-		if (teaService.selectOne(teaVO) != null) { // 존재 확인
+		teaVO = teaService.selectOne(teaVO);
+		if (teaVO != null) { // 존재 확인
 			
 			teaVO.setTeaCondition("현재 해당 쿼리 없음 추후 맞는 서치컨디션 입력");
 			if (teaService.delete(teaVO)) {
-				// 이미지도 지워야 함
+				//이미지 삭제 필요
+				System.out.println("삭제 성공 후 진입");
+				AlertVO sweetAlertVO = new AlertVO("상품 삭제", "상품 삭제 성공!", null, "success", "adminTea.do");
+				model.addAttribute("sweetAlert", sweetAlertVO);
 			}
 		}
-		
-		
-		return "redirect:adminTea.do";
+		return "alertTrue.jsp";
 	}
 	
 	// --------------------------------- 상품 변경 ---------------------------------
 	@RequestMapping(value = "/updateTea.do")
-	public String updateTea(TeaVO teaVO) {
+	public String updateTea(TeaVO teaVO, Model model) {
 		
 		if(teaService.selectOne(teaVO) != null) { // 존재 확인
 			
@@ -220,9 +236,10 @@ public class AdminTeaController {
 				
 			}
 		}
+		AlertVO sweetAlertVO = new AlertVO("상품 변경", "상품 변경 성공!", null, "success", "adminTea.do");
+		model.addAttribute("sweetAlert", sweetAlertVO);
 		
-		
-		return "redirect:adminTea.do";
+		return "alertTrue.jsp";
 	}
 	
 

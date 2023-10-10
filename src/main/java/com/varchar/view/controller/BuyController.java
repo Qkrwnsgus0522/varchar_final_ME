@@ -133,7 +133,6 @@ public class BuyController {
 				}
 			}
 			model.addAttribute("buyDetailDatas", buyDetailDatas);
-			// View님들 bddatas를 buyDetailDatas로 변수명 바꿔주셈 ---> ㅋㅋㅋㅋㅋㅋ귀엽네
 		}
 
 		return "buyDetail.jsp";
@@ -145,7 +144,6 @@ public class BuyController {
 			TeaVO teaVO, PaymentVO paymentVO, Model model, MemberVO memberVO) throws IOException {
 
 		// 결제 승인 API 호출하기
-
 		String orderName = request.getParameter("orderName");
 		String orderId = request.getParameter("orderId");
 		String paymentKey = request.getParameter("paymentKey");

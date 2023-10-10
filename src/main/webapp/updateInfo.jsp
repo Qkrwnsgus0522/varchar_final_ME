@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <!-- 파비콘 태그 -->
     <try:favicon/>
     <!-- 링크 부분 태그 -->
@@ -371,7 +373,26 @@
 		    		checkInputAddressDetail();
 		    		$("#inputAddressDetail").focus();
 		    	} else {
-              		$("#updateForm").submit();                			
+		    		// alert 시작
+		    		Swal.fire({
+		    			title: '회원정보변경', // 제목 text
+		    			text: '변경하시겠습니까?', // 내용 text
+		    			icon: 'question', // warning, success, info, error, question
+		    			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+		    			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+		    			showCancelButton: true, // cancle 버튼 보이기
+		    			confirmButtonText: '확인', // confirm 버튼 text
+		    			cancelButtonText: '취소' // cancel 버튼 text
+		    		}).then((result) => {
+		    			if (result.isConfirmed) {
+              				$("#updateForm").submit();                			
+		    			}
+		    			else {
+		    				//history.go(-1);
+		    			}
+		    		});
+		    		// alert 끝
+		    		
 		    	}
 	    	});
 	</script>
@@ -492,6 +513,37 @@
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
 
+  <!-- <script>
+  $("#inputSubmit").on("click", function(){
+		Swal.fire({
+			title: '회원정보변경', // 제목 text
+			text: '변경하시겠습니까?', // 내용 text
+			icon: 'question', // warning, success, info, error, question
+			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+			showCancelButton: true, // cancle 버튼 보이기
+			confirmButtonText: '확인', // confirm 버튼 text
+			cancelButtonText: '취소' // cancel 버튼 text
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					title: '회원정보변경',
+					text: '회원정보변경이 완료되었습니다!',
+					icon: 'success',
+					confirmButtonText: '확인'
+		        }).then((result) => {
+				location.href = 'updateInfo.do';	        		
+				});
+			}
+			else {
+				history.go(-1);
+			}
+		});
+	  
+  });
+
+  </script> -->
+  
   <script>
 		$(document).ready(function(){
 

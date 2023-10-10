@@ -9,8 +9,10 @@
     <title>Var茶 | <spring:message code='updateInfo.title' /></title> <!-- updateInfo.title -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <!-- 파비콘 태그 -->
     <try:favicon/>
     <!-- 링크 부분 태그 -->
@@ -189,7 +191,27 @@
 					    		checkInputPassword2();
 					    		$("#inputPassword2").focus();
 					    	} else {
-			              		$("#updatePwForm").submit();                			
+					    		
+					    		// alert 시작
+					    		Swal.fire({
+					    			title: '회원비밀번호변경', // 제목 text
+					    			text: '변경하시겠습니까?', // 내용 text
+					    			icon: 'question', // warning, success, info, error, question
+					    			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+					    			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+					    			showCancelButton: true, // cancle 버튼 보이기
+					    			confirmButtonText: '확인', // confirm 버튼 text
+					    			cancelButtonText: '취소' // cancel 버튼 text
+					    		}).then((result) => {
+					    			if (result.isConfirmed) {
+					    				$("#updatePwForm").submit();                			
+					    			}
+					    			else {
+					    				//history.go(-1);
+					    			}
+					    		});
+					    		// alert 끝
+			              		             			
 					    	}
 				    	});
 				</script>

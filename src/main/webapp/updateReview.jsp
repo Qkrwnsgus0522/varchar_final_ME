@@ -14,6 +14,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <script type="module">
     import * as LR from "https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.25.0/web/lr-file-uploader-regular.min.js";
 
@@ -119,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-	<form action="updateReview.do" method="post">
+	<form id="updateForm" action="updateReview.do" method="post">
 		<section class="ftco-section ftco-degree-bg">
 			<div class="container">
 				<div class="cart-list">
@@ -373,10 +375,37 @@
 						</div>
 					</div>
 				</div>
-				<input type="submit" class="btn btn-primary py-3 px-4" value="후기수정">
+				<input id="inputSubmit" type="button" class="btn btn-primary py-3 px-4" value="후기수정">
 			</div>
 		</section>
 	</form>
+	
+	<script>
+	// Submit (후기수정)
+	$("#inputSubmit").on("click", function(){
+		// alert 시작
+		Swal.fire({
+			title: '후기 수정', // 제목 text
+			text: '수정하시겠습니까?', // 내용 text
+			icon: 'question', // warning, success, info, error, question
+			confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+			cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+			showCancelButton: true, // cancle 버튼 보이기
+			confirmButtonText: '확인', // confirm 버튼 text
+			cancelButtonText: '취소' // cancel 버튼 text
+		}).then((result) => {
+			if (result.isConfirmed) {
+  				$("#updateForm").submit();                			
+			}
+			else {
+				//history.go(-1);
+			}
+		});
+		// alert 끝
+	});
+	</script>
+	
+	
 	<!-- .section -->
 
 	<footer class="ftco-footer ftco-section bg-light">

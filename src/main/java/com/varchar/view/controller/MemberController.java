@@ -242,9 +242,12 @@ public class MemberController {
 			if(memberService.update(memberVO)) { // 비밀번호 변경 성공 시
 				MessageAPI.messageAPI(memberVO, randomPw); // 임시비밀번호 문자발송
 				System.out.println("로그 : 임시비밀번호 문자 발송 성공");
+				
+				AlertVO sweetAlertVO = new AlertVO("비밀번호변경", "임시비밀번호 문자 발송!", null, "success", "login.jsp");
+				model.addAttribute("sweetAlert", sweetAlertVO);
 			}
 		}
-		return "login.jsp";
+		return "alertTrue.jsp";
 	}
 
 	// ------------------------------------- 이메일 전송 ------------------------------------------
@@ -293,6 +296,7 @@ public class MemberController {
 		session.setAttribute("sessionMemberName", memberVO.getMemberName());
 		session.setAttribute("sessionMemberPlatform", memberVO.getMemberPlatform());
 		session.setAttribute("sessionMemberGrade", memberVO.getMemberGrade());
+		// 스윗알랏 True(로그인 성공)
 		return "main.do";
 	}
 

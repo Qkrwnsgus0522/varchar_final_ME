@@ -266,7 +266,7 @@ public class ReviewController {
 		//** 해당 후기 없을시 ---> 유효성 추가 필요 */
 		reviewVO.setReviewSearch("리뷰상세");
 		reviewVO = reviewService.selectOne(reviewVO);
-		System.out.println("로그: UrpAction: " + reviewVO); // 로그 줄임말 실화?
+		System.out.println("로그: UrpAction: " + reviewVO);
 
 		if (reviewVO != null) {
 			// 리뷰 해시태그 selectAll
