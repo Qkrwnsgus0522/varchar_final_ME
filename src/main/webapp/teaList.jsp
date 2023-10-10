@@ -89,11 +89,9 @@
 				<div class="col-md-10 mb-5 text-center">
 					<ul class="product-category">
 						<li><a href="teaListPage.do">전체</a></li>
-						<li><a href="teaListPage.do?categoryName=녹차">녹차</a></li>
-						<li><a href="teaListPage.do?categoryName=홍차">홍차</a></li>
-						<li><a href="teaListPage.do?categoryName=루이보스">루이보스</a></li>
-						<li><a href="teaListPage.do?categoryName=우롱차">우롱차</a></li>
-						<li><a href="teaListPage.do?categoryName=허브차">허브차</a></li>
+						<c:forEach var="category" items="${ categorys }">
+                <li><a href="teaListPage.do?categoryName=${category.categoryName}">${category.categoryName}</a></li>
+                </c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -253,20 +251,40 @@
 					<div class="block-27">
 						<ul>
 							<c:if test="${ page.startPage > 1 }">
-								<li><a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }&teaHashtagContent=${ page.teaHashtagContent }&page=${ page.startPage - 1 }"> &lt; </a></li>
+								<li>
+									<a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }
+															&teaHashtagContent=${ page.teaHashtagContent }&page=${ page.startPage - 1 }">
+										&lt;
+									</a>
+								</li>
 							</c:if>
 							<c:forEach begin="${ page.startPage }" end="${ page.endPage }" var="p">
 								<c:choose>
 									<c:when test="${ page.currentPage eq p }">
-										<li class="active"><a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }&teaHashtagContent=${ page.teaHashtagContent }&page=${ p }">${ p }</a></li>
+										<li class="active">
+											<a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }
+																	&teaHashtagContent=${ page.teaHashtagContent }&page=${ p }">
+												${ p }
+											</a>
+										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }&teaHashtagContent=${ page.teaHashtagContent }&page=${ p }">${ p }</a></li>
+										<li>
+											<a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }
+																	&teaHashtagContent=${ page.teaHashtagContent }&page=${ p }">
+												${ p }
+											</a>
+										</li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${ page.endPage < page.totalPageCnt }">
-								<li><a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }&teaHashtagContent=${ page.teaHashtagContent }&page=${ page.endPage + 1 }"> &gt; </a></li>
+								<li>
+									<a href="teaListPage.do?categoryName=${ page.categoryName }&teaSearchWord=${ page.teaSearchWord }
+															&teaHashtagContent=${ page.teaHashtagContent }&page=${ page.endPage + 1 }">
+										&gt;
+									</a>
+								</li>
 							</c:if>
 						</ul>
 					</div>

@@ -101,11 +101,9 @@
             <div class="sidebar-box ftco-animate">
             	<h3 class="heading">Categories</h3>
               <ul class="categories">
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=녹차">녹차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=홍차">홍차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=우롱차">우롱차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=루이보스">루이보스차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=허브차">허브차</a></li>
+                <c:forEach var="category" items="${ categorys }">
+                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=${category.categoryName}">${category.categoryName}</a></li>
+                </c:forEach>
               </ul>
             </div>
 
@@ -161,9 +159,9 @@
               <ul>
               	<c:if test="${ page.startPage > 1 }">
               		<li>
-              	 	<a href="reviewListPage.do?searchName=${ page.searchName }&memberId=${ page.memberId }&reviewSearch=${ page.reviewSearch }&page=${ page.startPage - 1 }">
-              	 	&lt;
-              	 	</a>
+	              	 	<a href="reviewListPage.do?searchName=${ page.searchName }&memberId=${ page.memberId }&reviewSearch=${ page.reviewSearch }&page=${ page.startPage - 1 }">
+	              	 		&lt;
+	              	 	</a>
               	 	</li>
 				</c:if>
 				<c:forEach begin="${ page.startPage }" end="${ page.endPage }" var="p">
@@ -182,9 +180,9 @@
 				</c:forEach>
 				<c:if test="${ page.endPage < page.totalPageCnt }">
 					<li>
-					<a href="reviewListPage.do?searchName=${ page.searchName }&memberId=${ page.memberId }&reviewSearch=${ page.reviewSearch }&page=${ page.endPage + 1 }">
-					&gt;
-					</a>
+						<a href="reviewListPage.do?searchName=${ page.searchName }&memberId=${ page.memberId }&reviewSearch=${ page.reviewSearch }&page=${ page.endPage + 1 }">
+							&gt;
+						</a>
 					</li>
 				</c:if>
               </ul>
@@ -198,10 +196,10 @@
       <div class="container">
       	<div class="row">
       		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
+				<a href="#" class="mouse-icon">
+					<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+				</a>
+			</div>
       	</div>
         <div class="row mb-5">
           <div class="col-md">

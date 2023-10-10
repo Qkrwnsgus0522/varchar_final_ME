@@ -31,9 +31,9 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
-	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+				  <h1>Healing and Fresh with <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
+	              <!-- <h1 class="mb-2">the finest teas of the world</h1> -->
+	              <h2 class="subheading mb-4">Welcome to varchar</h2>
 	              <p><a href="teaListPage.do" class="btn btn-primary">Feel Healing</a></p>
 	            </div>
 
@@ -47,9 +47,9 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
-				  <h1>Healing and Fresh with  <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
-				  <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+				  <h1>Healing and Fresh with <span class="typer" id="some-id" data-delay="200" data-delim=":" data-words="varchar:var茶" data-colors="#4A55A2"></span><span class="cursor" data-cursorDisplay="_" data-owner="some-id"></span></h1>
+				  <!-- <h1 class="mb-2">the finest teas of the world</h1> -->
+	              <h2 class="subheading mb-4">Welcome to varchar</h2>
 	              <p><a href="teaListPage.do" class="btn btn-primary">Feel Healing</a></p>
 	            </div>
 
@@ -80,7 +80,7 @@
           </div>
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
+              <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2" onclick="window.open('https://instagram.com/varchar_official?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr', '_blank', '')">
             		<span class="fa-brands fa-instagram"></span>
               </div>
               <div class="media-body">

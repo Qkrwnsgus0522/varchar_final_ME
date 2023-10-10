@@ -36,6 +36,12 @@
   		.edit-red {
   			color: red;
   		}
+  		#html_element {
+  			margin: auto;
+  		}
+  		#spanRecaptcha {
+  			margin: auto;
+  		}
   	</style>
   </head>
   <body class="goto-here">
@@ -177,7 +183,7 @@
                       			console.log(flagAddress);
                       		},
                       		theme: {
-                                bgColor: "#23512E", //바탕 배경색
+                                bgColor: "#7895CB", //바탕 배경색
                                 searchBgColor: "#FFFFFF", //검색창 배경색
                                 contentBgColor: "#FFFFFF", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
                                 //pageBgColor: "", //페이지 배경색
@@ -191,12 +197,20 @@
                     }
                 </script>
                 <div class="w-100"></div>
+                <div class="col-md-12">
+	                <div class="form-group edit-d-f" style="margin-bottom: 0px;">
+						<div class="g-recaptcha" data-sitekey="6LfbYEsoAAAAADbMBkuObINtbVX7g93_RheWuUun"></div>
+			          	<div id="html_element">
+			          	
+			          	</div>
+	                </div>
+	                <label id="recaptchaLabel" class="edit-d-f" for="recaptcha"><span id="spanRecaptcha" class="edit-red"></span></label>
+                </div>
+                <div class="w-100"></div>
 	            </div>
 				<div style="margin:auto; text-align:center;">
-					<p><input id="inputSubmit" type="button" class="btn btn-primary py-3 px-4" value="  가입하기  "style="vertical-align:middle; display:inline-block;" onclick='return check_recaptcha();'></p>
+					<p><input id="inputSubmit" type="button" class="btn btn-primary py-3 px-4" value="가입하기" style="vertical-align:middle; display:inline-block;"></p>
 				</div>
-				<div class="g-recaptcha" data-sitekey="6LfbYEsoAAAAADbMBkuObINtbVX7g93_RheWuUun"></div>
-	          	<div id="html_element"></div>
 	          </form>
 	          <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
           	  <!-- 회원가입 폼 태그 끝 -->
@@ -217,6 +231,7 @@
     		var flagEmail = false;
     		var flagPhone = false;
     		var flagAddressDetail = false;
+			var flagRecaptcha = false;
 			
 			// 이름 입력
 			$("#inputName").on("input", function(){
@@ -358,47 +373,65 @@
 				console.log(flagAddressDetail);
 			}
 			
+			function checkRecaptcha(){
+				var v = grecaptcha.getResponse();
+				if (v.length == 0) {
+					$("#spanRecaptcha").html('<i class="fa-solid fa-x"></i> "로봇이 아닙니다."를 체크해주세요.');
+					flagRecaptcha = false;
+				} else {
+					$("#spanRecaptcha").html('<i class="fa-solid fa-check"></i>');
+					$("#spanRecaptcha").css("color", "green");
+					flagRecaptcha = true;
+				}
+			}
+			
+			// 유효성 flag 변수
+			var flagId = false;
+			var flagPassword1 = false;
+			var flagPassword2 = false;
+			var flagName = false;
+    		var flagEmail = false;
+    		var flagPhone = false;
+    		var flagAddress = false;
+    		var flagAddressDetail = false;
+			var flagRecaptcha = false;
+			
+			...
+			
 			// Submit 유효성 검사
 	    	$("#inputSubmit").on("click", function(){
-		    	if (!flagId) {
+		    	if (!flagId) { // 아이디 유효성 검사
 		    		checkInputId();
 		    		$("#inputId").focus();
-		    	} else if (!flagPassword1) {
+		    	} else if (!flagPassword1) { // 비밀번호 유효성 검사
 		    		checkInputPassword1();
 		    		$("#inputPassword1").focus();
-		    	} else if (!flagPassword2) {
+		    	} else if (!flagPassword2) { // 비밀번호 확인 유효성 검사
 		    		checkInputPassword2();
 		    		$("#inputPassword2").focus();
-		    	} else if (!flagName) {
+		    	} else if (!flagName) { // 이름 유효성 검사
 		    		checkInputName();
 		    		$("#inputName").focus();
-		    	}  else if (!flagPhone) {
+		    	} else if (!flagPhone) { // 연락처 유효성 검사
 		    		checkInputPhone();
 		    		$("#inputPhone").focus();
-		    	} else if (!flagEmail) {
+		    	} else if (!flagEmail) { // 이메일 유효성 검사
 		    		checkInputEmail();
 		    		$("#inputEmail").focus();
-		    	} else if (!flagAddress) {
+		    	} else if (!flagAddress) { // 주소 유효성 검사
 		    		$("#spanAddress").html(' <i class="fa-solid fa-x"></i> 필수 정보입니다.');
 		        	$("#spanAddress").css("color", "red");
 		        	$("#inputAddress").focus();
-		    	} else if (!flagAddressDetail) {
+		    	} else if (!flagAddressDetail) { // 상세주소 유효성 검사
 		    		checkInputAddressDetail();
 		    		$("#inputAddressDetail").focus();
 		    	} else {
-              		$("#signForm").submit();                			
+		    		checkRecaptcha();
+		    		if (flagRecaptcha) { // 리캡챠 유효성 검사
+	              		$("#signForm").submit();		    			
+		    		}
 		    	}
 	    	});
-			
-			function check_recaptcha(){
-				var v = grecaptcha.getResponse();
-				if (v.length ==0) {
-					alert ("'로봇이 아닙니다.'를 체크해주세요.");
-					return false;
-				} else {
-					return true;
-				}
-			}
 	</script>
 	<script type="text/javascript"> 
 	   history.replaceState({}, null, location.pathname);

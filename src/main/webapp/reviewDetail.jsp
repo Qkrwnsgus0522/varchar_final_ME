@@ -134,11 +134,9 @@
             <div class="sidebar-box ftco-animate">
             	<h3 class="heading">Categories</h3>
               <ul class="categories">
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=녹차">녹차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=홍차">홍차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=우롱차">우롱차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=루이보스">루이보스차</a></li>
-                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=허브차">허브차</a></li>
+              <c:forEach var="category" items="${ categorys }">
+                <li><a href="reviewListPage.do?searchName=CATEGORY&reviewSearch=${category.categoryName}">${category.categoryName}</a></li>
+              </c:forEach>
               </ul>
             </div>
 

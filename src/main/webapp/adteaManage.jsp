@@ -194,7 +194,7 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">카테고리 선택</label>
 													<div class="col-sm-9">
-														<select class="form-control" id="categoryToFix">
+														<select class="form-control" id="categoryToFix" name="categoryNum">
 														<option value="선택하세요" id="none" disabled selected hidden>카테고리 선택</option>
 															<c:forEach var="categoryData" items="${categoryDatas}">
 											<option value="${categoryData.categoryNum}">${categoryData.categoryName}</option>

@@ -23,8 +23,8 @@ public class CommonInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("               인터셉터 로그 : 실행");
-		modelAndView.addObject("categorys", categoryService.selectAll(null));
+		System.out.println("               [CommonInterceptor]");
+		modelAndView.addObject("categorys", categoryService.selectAll(null));			
 	}
 
 	@Override
