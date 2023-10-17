@@ -109,6 +109,7 @@
 	     });
     </script>
     <style type="text/css">
+    
  	#cartform{
  		text-align: start;
  	}
@@ -200,7 +201,12 @@
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>${ teaData.teaName }</h3>
-    				<p class="price"><span>${ teaData.teaPrice } 원</span></p>
+    				<c:if test="${ teaData.teaStatus eq 0 }">
+	    				<p class="price"><span>${ teaData.teaPrice } 원</span></p>
+    				</c:if>
+    				<c:if test="${ teaData.teaStatus eq 1 }">
+	    				<p class="price"><span>판매 중단</span></p>
+    				</c:if>
     				<p>${ teaData.teaContent }</p>
     					<div class="tag-widget post-tag-container mb-5 mt-5">
 							<div class="tagcloud">
@@ -228,7 +234,12 @@
 	             	</div>
 	          	<div class="w-100"></div>
 			<p>
-          		<button type="submit" class="primary-btn">Add to Cart</button> <!-- 카트 추가 버튼 -->
+				<c:if test="${ teaData.teaStatus eq 0 }">
+	          		<button type="submit" class="primary-btn">Add to Cart</button> <!-- 카트 추가 버튼 -->
+    			</c:if>
+    			<c:if test="${ teaData.teaStatus eq 1 }">
+	    			<button type="submit" class="primary-btn edit_bg_disabled" style="background: #9d9ca6 !important;" disabled>Add to Cart</button> <!-- 카트 추가 버튼 -->
+    			</c:if>
           		
           		<c:if test="${ not empty sessionMemberId }">
 				<button id="fcBtn" type="button" class="btn-secondary like-review"> <!-- 찜 좋아요 버튼 -->

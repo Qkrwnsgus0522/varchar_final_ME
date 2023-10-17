@@ -229,6 +229,7 @@ class TeaSelectRowMapper implements RowMapper<TeaVO> {
 		data.setTeaPrice(rs.getInt("TEA_PRICE"));
 		data.setTeaCnt(rs.getInt("TEA_CNT"));
 		data.setTeaContent(rs.getString("TEA_CONTENT"));
+		data.setTeaStatus(rs.getInt("TEA_STATUS"));
 		data.setCategoryName(rs.getString("CATEGORY_NAME"));
 		data.setImageUrl(rs.getString("IMAGE_URL"));
 		return data;

@@ -85,7 +85,7 @@
                 
                   <div class="col-md-6">
                     <div class="card-body">
-                      <h4 class="card-title">후기 해시태그 추가/삭제/수정</h4>
+                      <h4 class="card-title">후기 해시태그 삭제</h4>
                       <div class="template-demo">
 									  <div class="form-group">
 										<h5><strong>상품 카테고리 선택</strong></h5>

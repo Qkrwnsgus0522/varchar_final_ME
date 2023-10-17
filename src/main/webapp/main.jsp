@@ -69,7 +69,7 @@
 				<div class="row no-gutters ftco-services">
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
+              <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2" onclick="window.open('https://www.notion.so/TryCatchers-dedc520b97da420fb20ad5c32ad8287b', '_blank', '')">
             		<span class="fa-solid fa-mug-hot"></span>
               </div>
               <div class="media-body">
@@ -103,7 +103,7 @@
           </div>
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
-              <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
+              <div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2" onclick="window.open('https://github.com/TryCatchers/varChar_FinalProject', '_blank', '')">
             		<span class="fa-solid fa-cake-candles"></span>
               </div>
               <div class="media-body">
@@ -286,7 +286,7 @@
 					  </span>
 					</div>
 					<div class="text text-center">
-					  <p class="mb-5 pl-4 line">쥰나 하기 싫다<br>집가고 싶다<br>에효 이거 줄 수<br>맞춰야되네<br>그지같은 거<br>뷰 화이팅</p>
+					  <p class="mb-5 pl-4 line"> 최종 프로젝트를 준비하면서 소통의 중요성을 많이 느꼈습니다. 소통이 이뤄지지 않아 발생하는 이슈들을 해결하기 위해 더 많은 소통이 필요했습니다. 이번 계기로 협업을 위한 소통이 무엇인지 깨달았고, 작은 움직임이 결과적으로 큰 변화를 준다는 것을 몸소 느꼈습니다. 앞으로 진행될 프로젝트에서는 더 나은 모습의 과정과 결과를 만들겠습니다.</p>
 					  <p class="name">탄 다 미</p>
 					  <span class="position">팀원 &nbsp;:&nbsp; Controller</span>
 					</div>
@@ -300,7 +300,7 @@
 					  </span>
 					</div>
 					<div class="text text-center">
-					  <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					  <p class="mb-5 pl-4 line"> 최종 프로젝트를 통해 협업과 커뮤니케이션의 중요성을 느꼈습니다. 개발 과정에서 원활하고 많은 의사소통이 필요하다는 것을 깨달았습니다. 또한 팀원들과 함께 문제를 분석하고 해결책을 찾아내는 과정에서 상호간의 지식 공유로 어려운 문제에 대처하는 능력을 키울 수 있었습니다. 앞으로도 이러한 요소들에 대한 중요성을 잊지 않고 좋은 결과를 만들어내겠습니다.</p>
 					  <p class="name">박 준 현</p>
 					  <span class="position">팀장 &nbsp;:&nbsp; View</span>
 					</div>
@@ -314,7 +314,7 @@
 					  </span>
 					</div>
 					<div class="text text-center">
-					  <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					  <p class="mb-5 pl-4 line"> 크고 작은 프로젝트를 진행하면서 협업의 중요성과 설계 흐름을 파악할 수 있었습니다. 이와 연결되어 프로젝트 설계 시 추상적으로만 보이던 것이 구체화되어 실현되는 것에 흥미를 느낄 수 있었습니다. 단순히 구현에 집중하는 개발자가 아닌 설계와 구조를 중시하며 여러 분야의 협업과 연결에 중점을 두는 개발자가 될 것입니다.</p>
 					  <p class="name">권 지 현</p>
 					  <span class="position">팀원 &nbsp;:&nbsp; Controller</span>
 					</div>
@@ -322,13 +322,13 @@
 				</div>
 				<div class="item">
 				  <div class="testimony-wrap p-4 pb-5">
-					<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+					<div class="user-img mb-5" style="background-image: url(images/person_4.jpg)">
 					  <span class="quote d-flex align-items-center justify-content-center">
 						<i class="icon-quote-left"></i>
 					  </span>
 					</div>
 					<div class="text text-center">
-					  <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					  <p class="mb-5 pl-4 line"> 프로젝트를 통해 웹 개발에 대한 실전 경험을 쌓을 수 있었고, 팀원들의 지원과 협력 덕분에 만족스러운 결과물을 도출할 수 있었습니다. 이 경험을 통해 개발 역량과 문제 해결 능력이 크게 성장한 것 같고, 함께 일하며 배운 것들은 앞으로의 개발자로서의 성장과 발전에 큰 도움이 될 같습니다.</p>
 					  <p class="name">김 지 훈</p>
 					  <span class="position">팀원 &nbsp;:&nbsp; Model</span>
 					</div>
@@ -336,13 +336,13 @@
 				</div>
 				<div class="item">
 				  <div class="testimony-wrap p-4 pb-5">
-					<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+					<div class="user-img mb-5" style="background-image: url(images/person_5.jpg)">
 					  <span class="quote d-flex align-items-center justify-content-center">
 						<i class="icon-quote-left"></i>
 					  </span>
 					</div>
 					<div class="text text-center">
-					  <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					  <p class="mb-5 pl-4 line"> 이번 프로젝트를 통해 협업의 중요성을 깨닫게 되었습니다. 서로 다른 생각과 의견으로 인해 소통의 부재가 오류를 야기하는 경우가 많았습니다. 하지만 이러한 문제들을 해결하기 위해 팀원들과의 협력이 필수적임을 깨달았습니다. 이 경험은 제 실력 향상에 큰 도움이 되었고, 앞으로의 프로젝트에서도 더 나은 협업과 소통을 추구하게 되었습니다.</p>
 					  <p class="name">류 준 원</p>
 					  <span class="position">팀원 &nbsp;:&nbsp; Model</span>
 					</div>
@@ -350,13 +350,13 @@
 				</div>
 				<div class="item">
 					<div class="testimony-wrap p-4 pb-5">
-					  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+					  <div class="user-img mb-5" style="background-image: url(images/person_6.jpg)">
 						<span class="quote d-flex align-items-center justify-content-center">
 						  <i class="icon-quote-left"></i>
 						</span>
 					  </div>
 					  <div class="text text-center">
-						<p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+						<p class="mb-5 pl-4 line"> 6달간의 훈련과정을 요약하는 최종 프로젝트인만큼, 많은 긴장감을 가지고 있었습니다. 하지만 팀원들간의 꾸준한 회의와 협력이 양질의 프로젝트는 물론, 저의 실력 향상에도 큰 도움을 주었습니다. 다시 한번 저희 팀원들에게 감사의 말씀을 전해드리고 싶습니다.</p>
 						<p class="name">정 윤 구</p>
 						<span class="position">팀원 &nbsp;:&nbsp; View</span>
 					  </div>
